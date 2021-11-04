@@ -5,6 +5,6 @@ kumuluzee:
     name: dev
   datasources:
   - jndi-name: jdbc/LokacijskiOpomnikiDS
-    connection-url: jdbc:postgresql://localhost:5432/nakupovalniseznami
+    connection-url: jdbc:postgresql://localhost:5432/polnilnePostaje
     username: postgres
     password: postgres
