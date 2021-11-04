@@ -92,4 +92,11 @@ public class Uporabnik implements Serializable{
     public void setLastnistva(List<Lastnistvo> lastnistva) {
         this.lastnistva = lastnistva;
     }
+    public List<Najem> getNajemi() {
+        return this.najemi;
+    }
+
+    public void setNajemi(List<Najem> najemi) {
+        this.najemi = najemi;
+    }
 }
