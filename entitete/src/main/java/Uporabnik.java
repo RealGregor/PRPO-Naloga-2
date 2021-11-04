@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name= "nakupovalni_seznam")
+@Table(name= "uporabnik")
 @NamedQueries(value =
         {
                 //vrni vse uporabnike
