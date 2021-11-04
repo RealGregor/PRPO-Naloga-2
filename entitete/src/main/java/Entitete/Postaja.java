@@ -1,3 +1,5 @@
+package Entitete;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -7,16 +9,16 @@ import java.util.List;
 @NamedQueries(value =
         {
                 //vrni vse postaje
-                @NamedQuery(name = "Postaja.getAll",
+                @NamedQuery(name = "Entitete.Postaja.getAll",
                         query = "SELECT p FROM Postaja p"),
                 //vrni vse lokacije postaj
-                @NamedQuery(name = "Postaja.getAllLocations",
+                @NamedQuery(name = "Entitete.Postaja.getAllLocations",
                         query = "SELECT p.lokacija FROM Postaja p"),
                 //vrni vse postaje na določeni lokaciji
-                @NamedQuery(name = "Postaja.getStationsByLocation",
+                @NamedQuery(name = "Entitete.Postaja.getStationsByLocation",
                         query = "SELECT p FROM Postaja p WHERE p.lokacija = :lokacija"),
                 //vrni vse postaje s ceno manjšo od podane
-                @NamedQuery(name = "Postaja.getStationsCheaperThan",
+                @NamedQuery(name = "Entitete.Postaja.getStationsCheaperThan",
                         query = "SELECT p FROM Postaja p WHERE p.cena < :cena"),
         })
 

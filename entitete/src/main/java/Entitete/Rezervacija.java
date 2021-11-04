@@ -1,25 +1,22 @@
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+package Entitete;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name= "rezervacija")
 @NamedQueries(value =
         {
                 //vrni vse rezervacije
-                @NamedQuery(name = "Rezervacija.getAll",
+                @NamedQuery(name = "Entitete.Rezervacija.getAll",
                         query = "SELECT x FROM Rezervacija x"),
                 //vrni rezervacijo
-                @NamedQuery(name = "Rezervacija.vrniRezervacijo",
+                @NamedQuery(name = "Entitete.Rezervacija.vrniRezervacijo",
                         query = "SELECT x FROM Rezervacija x WHERE x.id = :rezervacijaId"),
                 //vrni vse rezervacije uporabnika z id
-                @NamedQuery(name = "Rezervacija.vrniRezervacijeUporabnika",
+                @NamedQuery(name = "Entitete.Rezervacija.vrniRezervacijeUporabnika",
                         query = "SELECT x FROM Rezervacija x WHERE x.uporabnik = :uporabnikId"),
                 //vrni vsa rezervacije neke postaje
-                @NamedQuery(name = "Rezervacija.vrniVseLastnike",
+                @NamedQuery(name = "Entitete.Rezervacija.vrniVseLastnike",
                         query = "SELECT x FROM Rezervacija x WHERE x.postaja = :postajaId"),
         })
 

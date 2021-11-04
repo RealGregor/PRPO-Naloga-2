@@ -1,28 +1,25 @@
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
+package Entitete;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name= "najem")
 @NamedQueries(value =
         {
                 //vrni vse najeme
-                @NamedQuery(name = "Najem.getAll",
+                @NamedQuery(name = "Entitete.Najem.getAll",
                         query = "SELECT x FROM Najem x"),
                 //vrni najem
-                @NamedQuery(name = "Najem.vrniNajem",
+                @NamedQuery(name = "Entitete.Najem.vrniNajem",
                         query = "SELECT x FROM Najem x WHERE x.id = :najemId"),
                 //vrni vse najeme uporabnika z id
-                @NamedQuery(name = "Najem.vrniNajemeUporabnika",
+                @NamedQuery(name = "Entitete.Najem.vrniNajemeUporabnika",
                         query = "SELECT x FROM Najem x WHERE x.uporabnik = :uporabnikId"),
                 //vrni vsa najeme neke postaje
-                @NamedQuery(name = "Najem.vrniVseNajemePostaje",
+                @NamedQuery(name = "Entitete.Najem.vrniVseNajemePostaje",
                         query = "SELECT x FROM Najem x WHERE x.postaja = :postajaId"),
                 //vrni vse že najete postaje
-                @NamedQuery(name = "Najem.vrniZeNajetePostaje",
+                @NamedQuery(name = "Entitete.Najem.vrniZeNajetePostaje",
                         query = "SELECT DISTINCT x.postaja FROM Najem x"),
         })
 

@@ -1,3 +1,8 @@
+package Servlets;
+
+import Entitete.Uporabnik;
+import Zrno.UporabnikZrno;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +22,8 @@ public class JPAServlet extends HttpServlet {
         List<Uporabnik> uporabniki = uporabnikiZrno.getUporabniki();
 
         // izpis uporabnikov na spletno stran
-        for (Uporabnik x : uporabniki) {
+        for (Entitete.Uporabnik x : uporabniki) {
             resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
         }
-
     }
 }

@@ -1,3 +1,7 @@
+package Zrno;
+
+import Entitete.Najem;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

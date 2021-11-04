@@ -1,22 +1,22 @@
+package Entitete;
+
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name= "lastnistvo")
 @NamedQueries(value =
         {
                 //vrni vsa lastnistva
-                @NamedQuery(name = "Lastnistvo.getAll",
+                @NamedQuery(name = "Entitete.Lastnistvo.getAll",
                         query = "SELECT x FROM Lastnistvo x"),
                 //vrni vsa lastnistva uporabnika z id
-                @NamedQuery(name = "Lastnistvo.vrniVsaLasnistvaId",
+                @NamedQuery(name = "Entitete.Lastnistvo.vrniVsaLasnistvaId",
                         query = "SELECT x.postaja FROM Lastnistvo x WHERE x.uporabnik = :uporabnikId"),
                 //vrni vsa lastnike neke polnilnice
-                @NamedQuery(name = "Lastnistvo.vrniVseLastnike",
+                @NamedQuery(name = "Entitete.Lastnistvo.vrniVseLastnike",
                         query = "SELECT x.uporabnik FROM Lastnistvo x WHERE x.postaja = :postajaId"),
                 //vrni vse postaje
-                @NamedQuery(name = "Lastnistvo.vrniVsePostaje",
+                @NamedQuery(name = "Entitete.Lastnistvo.vrniVsePostaje",
                         query = "SELECT DISTINCT x.postaja FROM Lastnistvo x"),
         })
 

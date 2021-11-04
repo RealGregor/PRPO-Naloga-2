@@ -1,3 +1,5 @@
+package Entitete;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -7,19 +9,19 @@ import java.util.List;
 @NamedQueries(value =
         {
                 //vrni vse uporabnike
-                @NamedQuery(name = "Uporabnik.getAll",
+                @NamedQuery(name = "Entitete.Uporabnik.getAll",
                         query = "SELECT x FROM Uporabnik x"),
                 //vrni vse uporabnike
-                @NamedQuery(name = "Uporabnik.getAllUsernames",
+                @NamedQuery(name = "Entitete.Uporabnik.getAllUsernames",
                         query = "SELECT x.uporabniskoIme FROM Uporabnik x"),
                 //vrni vse uporabnike z določenim imenom
-                @NamedQuery(name = "Uporabnik.getUsersByName",
+                @NamedQuery(name = "Entitete.Uporabnik.getUsersByName",
                         query = "SELECT x FROM Uporabnik x WHERE x.ime = :ime"),
                 //vrni vse uporabnike z določenim imenom
-                @NamedQuery(name = "Uporabnik.getUserByEmail",
+                @NamedQuery(name = "Entitete.Uporabnik.getUserByEmail",
                         query = "SELECT x FROM Uporabnik x WHERE x.email = :email"),
                 //vrni vse polnilne postaje uporabnika
-                @NamedQuery(name = "Uporabnik.vrniLastnistva",
+                @NamedQuery(name = "Entitete.Uporabnik.vrniLastnistva",
                         query = "SELECT x.lastnistva FROM Uporabnik x WHERE x.id = :id")
         })
 

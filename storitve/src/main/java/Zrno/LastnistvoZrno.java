@@ -1,3 +1,7 @@
+package Zrno;
+
+import Entitete.Lastnistvo;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -6,15 +10,15 @@ import java.util.List;
 
 @ApplicationScoped
 
-public class RezervacijaZrno {
+public class LastnistvoZrno {
 
     @PersistenceContext(unitName = "lokacijski-opomniki-jpa")
     private EntityManager em;
 
 
-    public List<Rezervacija> getRezervacije() {
-        Query q = em.createNamedQuery("Rezervacija.getAll");
-        List<Rezervacija> resultSet = (List<Rezervacija>)q.getResultList();
+    public List<Lastnistvo> getLastnistva() {
+        Query q = em.createNamedQuery("Lastnistvo.getAll");
+        List<Lastnistvo> resultSet = (List<Lastnistvo>)q.getResultList();
         return resultSet;
     }
 
