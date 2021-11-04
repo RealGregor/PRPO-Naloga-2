@@ -16,7 +16,7 @@ import java.util.List;
                 @NamedQuery(name = "Uporabnik.getUsersByName",
                         query = "SELECT x FROM Uporabnik x WHERE x.ime = :ime"),
                 //vrni vse uporabnike z določenim imenom
-                @NamedQuery(name = "Uporabnik.getUsersByName",
+                @NamedQuery(name = "Uporabnik.getUserByEmail",
                         query = "SELECT x FROM Uporabnik x WHERE x.email = :email"),
                 //vrni vse polnilne postaje uporabnika
                 @NamedQuery(name = "Uporabnik.vrniLastnistva",
