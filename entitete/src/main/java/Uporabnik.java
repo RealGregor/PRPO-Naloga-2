@@ -36,14 +36,14 @@ public class Uporabnik implements Serializable{
     @Column(name = "uporabnisko_ime")
     private String uporabniskoIme;
 
-    @OneToMany
-    @JoinColumn(name = "najem_id")
+    @OneToMany(mappedBy = "uporabnik")
     private List<Najem> najemi;
 
-    @OneToMany
-    @JoinColumn(name = "lastnistvo_id")
+    @OneToMany(mappedBy = "uporabnik")
     private List<Lastnistvo> lastnistva;
 
+    @OneToMany(mappedBy = "uporabnik")
+    private List<Rezervacija> rezervacije;
 
     //getters and setters
     public Integer getId() {
@@ -98,5 +98,13 @@ public class Uporabnik implements Serializable{
 
     public void setNajemi(List<Najem> najemi) {
         this.najemi = najemi;
+    }
+
+    public List<Rezervacija> getRezervacije() {
+        return rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
     }
 }
