@@ -17,6 +17,9 @@ public class JPAServlet extends HttpServlet {
         List<Uporabnik> uporabniki = uporabnikiZrno.getUporabniki();
 
         // izpis uporabnikov na spletno stran
+        for (Uporabnik x : uporabniki) {
+            resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
+        }
 
     }
 }

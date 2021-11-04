@@ -1,6 +1,7 @@
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @ApplicationScoped
@@ -12,9 +13,9 @@ public class NajemZrno {
 
 
     public List<Najem> getNajeme() {
-
-        // implementacija
-        return null;
+        Query q = em.createNamedQuery("Najem.getAll");
+        List<Najem> resultSet = (List<Najem>)q.getResultList();
+        return resultSet;
     }
 
 }
