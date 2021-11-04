@@ -79,4 +79,5 @@ public class Rezervacija {
     public void setKonecRezervacije(LocalDateTime konecRezervacije) {
         this.konecRezervacije = konecRezervacije;
     }
+
 }

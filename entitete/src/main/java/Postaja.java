@@ -3,7 +3,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name= "nakupovalni_seznam")
+@Table(name= "postaja")
 @NamedQueries(value =
         {
                 //vrni vse postaje
@@ -32,7 +32,7 @@ public class Postaja implements Serializable{
     private double cena;
 
     @Column(name = "obratovalni_cas_zacetek")
-    private String obratovalniCasZaceket;
+    private String obratovalniCasZacetek;
 
     @Column(name = "obratovalni_cas_konec")
     private String obratovalniCasKonec;
@@ -92,11 +92,11 @@ public class Postaja implements Serializable{
     }
     
     public String getObratovalniCasZacetek() {
-        return this.obratovalniCasZaceket;
+        return this.obratovalniCasZacetek;
     }
 
     public void setObratovalniCasZacetek(String cas) {
-        this.obratovalniCasZaceket = cas;
+        this.obratovalniCasZacetek= cas;
     }
     
     public String getObratovalniCasKonec() {

@@ -34,7 +34,6 @@ public class Lastnistvo {
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
-
     public Integer getId() {
         return id;
     }
