@@ -30,15 +30,19 @@ public class Rezervacija {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "uporabnik_id")
-    private Uporabnik uporabnik;
-
-    @ManyToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
-    LocalDateTime zacetekRezervacije;
-    LocalDateTime konecRezervacije;
+    @ManyToOne
+    @JoinColumn(name = "uporabnik_id")
+    private Uporabnik uporabnik;
+
+    @Column(name = "zacetek_rezervacije")
+    //LocalDateTime zacetekRezervacije;
+    private String zacetekRezervacije;
+    @Column(name = "konec_rezervacije")
+    private String konecRezervacije;
+    //LocalDateTime konecRezervacije;
 
     public Integer getId() {
         return id;
@@ -64,7 +68,7 @@ public class Rezervacija {
         this.postaja = postaja;
     }
 
-    public LocalDateTime getZacetekRezervacije() {
+    /*public LocalDateTime getZacetekRezervacije() {
         return zacetekRezervacije;
     }
 
@@ -78,6 +82,21 @@ public class Rezervacija {
 
     public void setKonecRezervacije(LocalDateTime konecRezervacije) {
         this.konecRezervacije = konecRezervacije;
+    }*/
+
+    public String getZacetekRezervacije() {
+        return zacetekRezervacije;
     }
 
+    public void setZacetekRezervacije(String zacetekRezervacije) {
+        this.zacetekRezervacije = zacetekRezervacije;
+    }
+
+    public String getKonecRezervacije() {
+        return konecRezervacije;
+    }
+
+    public void setKonecRezervacije(String konecRezervacije) {
+        this.konecRezervacije = konecRezervacije;
+    }
 }

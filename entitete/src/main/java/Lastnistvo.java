@@ -26,13 +26,13 @@ public class Lastnistvo {
     @Column(name = "lastnistvo_id")
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "uporabnik_id")
-    private Uporabnik uporabnik;
-
     @OneToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
+
+    @ManyToOne
+    @JoinColumn(name = "uporabnik_id")
+    private Uporabnik uporabnik;
 
     public Integer getId() {
         return id;
