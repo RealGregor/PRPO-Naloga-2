@@ -16,13 +16,14 @@ public class UporabnikZrno {
     @PersistenceContext(unitName = "lokacijski-opomniki-jpa")
     private EntityManager em;
 
-
+    //JPQL
     public List<Uporabnik> getUporabniki() {
         // implementacija
         Query q = em.createNamedQuery("Uporabnik.getAll");
         List<Uporabnik> resultSet = (List<Uporabnik>)q.getResultList();
         return resultSet;
     }
+    //CriteriaAPI
     public List<Uporabnik> getUporabnikiCriteriaAPI() {
         // implementacija
         CriteriaBuilder cb = em.getCriteriaBuilder();

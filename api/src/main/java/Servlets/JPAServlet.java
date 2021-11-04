@@ -20,7 +20,14 @@ public class JPAServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         List<Uporabnik> uporabniki = uporabnikiZrno.getUporabnikiCriteriaAPI();
+        resp.getWriter().println("Podatki o uporabnikih pridobljeni z JPQL:");
+        // izpis uporabnikov na spletno stran
+        for (Uporabnik x : uporabniki) {
+            resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
+        }
 
+        uporabniki = uporabnikiZrno.getUporabnikiCriteriaAPI();
+        resp.getWriter().println("Podatki o uporabnikih pridobljeni z CriteriaAPI:");
         // izpis uporabnikov na spletno stran
         for (Uporabnik x : uporabniki) {
             resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
