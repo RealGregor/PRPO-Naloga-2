@@ -1,6 +1,7 @@
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 @ApplicationScoped
@@ -12,9 +13,9 @@ public class PostajaZrno {
 
 
     public List<Postaja> getPostaje() {
-
-        // implementacija
-        return null;
+        Query q = em.createNamedQuery("Postaja.getAll");
+        List<Postaja> resultSet = (List<Postaja>)q.getResultList();
+        return resultSet;
     }
 
 }
