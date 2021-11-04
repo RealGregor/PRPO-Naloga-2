@@ -9,19 +9,19 @@ import java.util.List;
 @NamedQueries(value =
         {
                 //vrni vse uporabnike
-                @NamedQuery(name = "Entitete.Uporabnik.getAll",
+                @NamedQuery(name = "Uporabnik.getAll",
                         query = "SELECT x FROM Uporabnik x"),
                 //vrni vse uporabnike
-                @NamedQuery(name = "Entitete.Uporabnik.getAllUsernames",
+                @NamedQuery(name = "Uporabnik.getAllUsernames",
                         query = "SELECT x.uporabniskoIme FROM Uporabnik x"),
                 //vrni vse uporabnike z določenim imenom
-                @NamedQuery(name = "Entitete.Uporabnik.getUsersByName",
+                @NamedQuery(name = "Uporabnik.getUsersByName",
                         query = "SELECT x FROM Uporabnik x WHERE x.ime = :ime"),
                 //vrni vse uporabnike z določenim imenom
-                @NamedQuery(name = "Entitete.Uporabnik.getUserByEmail",
+                @NamedQuery(name = "Uporabnik.getUserByEmail",
                         query = "SELECT x FROM Uporabnik x WHERE x.email = :email"),
                 //vrni vse polnilne postaje uporabnika
-                @NamedQuery(name = "Entitete.Uporabnik.vrniLastnistva",
+                @NamedQuery(name = "Uporabnik.vrniLastnistva",
                         query = "SELECT x.lastnistva FROM Uporabnik x WHERE x.id = :id")
         })
 

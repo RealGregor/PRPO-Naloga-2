@@ -28,7 +28,8 @@ public class UporabnikZrno {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Uporabnik> c = cb.createQuery(Uporabnik.class);
         Root<Uporabnik> emp = c.from(Uporabnik.class);
-        List<Uporabnik> resultSet = (List<Uporabnik>)c.select(emp);
+        TypedQuery<Uporabnik> query = em.createQuery(c);
+        List<Uporabnik> resultSet = query.getResultList();
         return resultSet;
     }
 }

@@ -9,16 +9,16 @@ import java.util.List;
 @NamedQueries(value =
         {
                 //vrni vse postaje
-                @NamedQuery(name = "Entitete.Postaja.getAll",
+                @NamedQuery(name = "Postaja.getAll",
                         query = "SELECT p FROM Postaja p"),
                 //vrni vse lokacije postaj
-                @NamedQuery(name = "Entitete.Postaja.getAllLocations",
+                @NamedQuery(name = "Postaja.getAllLocations",
                         query = "SELECT p.lokacija FROM Postaja p"),
                 //vrni vse postaje na določeni lokaciji
-                @NamedQuery(name = "Entitete.Postaja.getStationsByLocation",
+                @NamedQuery(name = "Postaja.getStationsByLocation",
                         query = "SELECT p FROM Postaja p WHERE p.lokacija = :lokacija"),
                 //vrni vse postaje s ceno manjšo od podane
-                @NamedQuery(name = "Entitete.Postaja.getStationsCheaperThan",
+                @NamedQuery(name = "Postaja.getStationsCheaperThan",
                         query = "SELECT p FROM Postaja p WHERE p.cena < :cena"),
         })
 

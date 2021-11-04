@@ -7,16 +7,16 @@ import javax.persistence.*;
 @NamedQueries(value =
         {
                 //vrni vse rezervacije
-                @NamedQuery(name = "Entitete.Rezervacija.getAll",
+                @NamedQuery(name = "Rezervacija.getAll",
                         query = "SELECT x FROM Rezervacija x"),
                 //vrni rezervacijo
-                @NamedQuery(name = "Entitete.Rezervacija.vrniRezervacijo",
+                @NamedQuery(name = "Rezervacija.vrniRezervacijo",
                         query = "SELECT x FROM Rezervacija x WHERE x.id = :rezervacijaId"),
                 //vrni vse rezervacije uporabnika z id
-                @NamedQuery(name = "Entitete.Rezervacija.vrniRezervacijeUporabnika",
+                @NamedQuery(name = "Rezervacija.vrniRezervacijeUporabnika",
                         query = "SELECT x FROM Rezervacija x WHERE x.uporabnik = :uporabnikId"),
                 //vrni vsa rezervacije neke postaje
-                @NamedQuery(name = "Entitete.Rezervacija.vrniVseLastnike",
+                @NamedQuery(name = "Rezervacija.vrniVseLastnike",
                         query = "SELECT x FROM Rezervacija x WHERE x.postaja = :postajaId"),
         })
 

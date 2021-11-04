@@ -7,19 +7,19 @@ import javax.persistence.*;
 @NamedQueries(value =
         {
                 //vrni vse najeme
-                @NamedQuery(name = "Entitete.Najem.getAll",
+                @NamedQuery(name = "Najem.getAll",
                         query = "SELECT x FROM Najem x"),
                 //vrni najem
-                @NamedQuery(name = "Entitete.Najem.vrniNajem",
+                @NamedQuery(name = "Najem.vrniNajem",
                         query = "SELECT x FROM Najem x WHERE x.id = :najemId"),
                 //vrni vse najeme uporabnika z id
-                @NamedQuery(name = "Entitete.Najem.vrniNajemeUporabnika",
+                @NamedQuery(name = "Najem.vrniNajemeUporabnika",
                         query = "SELECT x FROM Najem x WHERE x.uporabnik = :uporabnikId"),
                 //vrni vsa najeme neke postaje
-                @NamedQuery(name = "Entitete.Najem.vrniVseNajemePostaje",
+                @NamedQuery(name = "Najem.vrniVseNajemePostaje",
                         query = "SELECT x FROM Najem x WHERE x.postaja = :postajaId"),
                 //vrni vse že najete postaje
-                @NamedQuery(name = "Entitete.Najem.vrniZeNajetePostaje",
+                @NamedQuery(name = "Najem.vrniZeNajetePostaje",
                         query = "SELECT DISTINCT x.postaja FROM Najem x"),
         })
 

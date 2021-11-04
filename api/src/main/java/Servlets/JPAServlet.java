@@ -19,10 +19,10 @@ public class JPAServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<Uporabnik> uporabniki = uporabnikiZrno.getUporabniki();
+        List<Uporabnik> uporabniki = uporabnikiZrno.getUporabnikiCriteriaAPI();
 
         // izpis uporabnikov na spletno stran
-        for (Entitete.Uporabnik x : uporabniki) {
+        for (Uporabnik x : uporabniki) {
             resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
         }
     }
