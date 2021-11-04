@@ -1,5 +1,6 @@
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name= "nakupovalni_seznam")
@@ -36,13 +37,17 @@ public class Postaja implements Serializable{
     @Column(name = "obratovalni_cas_konec")
     private String obratovalniCasKonec;
 
-    @OneToOne
-    @JoinColumn(name = "najem_id")
+    @OneToOne(mappedBy = "postaja")
+    // @JoinColumn(name = "postaja_id")
     private Najem najem;
 
-    @OneToOne
-    @JoinColumn(name = "lastnistvo_id")
+    @OneToOne(mappedBy = "postaja")
+    // @JoinColumn(name = "postaja_id")
     private Lastnistvo lastnistvo;
+
+    @OneToMany(mappedBy = "postaja")
+    // @JoinColumn(name = "postaja_id")
+    private List<Rezervacija> rezervacije;
 
 
     //getters and setters
@@ -116,5 +121,13 @@ public class Postaja implements Serializable{
 
     public void setLastnistvo(Lastnistvo lastnistvo) {
         this.lastnistvo = lastnistvo;
+    }
+
+    public List<Rezervacija> getRezervacije() {
+        return this.rezervacije;
+    }
+
+    public void setRezervacije(List<Rezervacija> rezervacije) {
+        this.rezervacije = rezervacije;
     }
 }

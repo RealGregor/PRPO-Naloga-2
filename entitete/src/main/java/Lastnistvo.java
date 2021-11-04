@@ -30,7 +30,7 @@ public class Lastnistvo {
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
