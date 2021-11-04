@@ -1,12 +1,12 @@
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Petra', 'Kos', 'petrakos', 'petra.kos@hotmail.com');
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Miha', 'Novak', 'mihanovak', 'miha.novak@gmail.com');
-INSERT INTO postaja (ime, specifikacije, lokacija, obratovalni_cas_zacetek, obratovalni_cas_konec, cena ) VALUES ("postaja1", "polnilna postaja1", "Ljubljana", "8:00", "20:00", "5");
-INSERT INTO postaja (ime, specifikacije, lokacija, obratovalni_cas_zacetek, obratovalni_cas_konec, cena ) VALUES ("postaja2", "polnilna postaja2", "Novo mesto", "9:00", "21:00", "15");
+INSERT INTO postaja (ime, specifikacije, lokacija, obratovalni_cas_zacetek, obratovalni_cas_konec, cena ) VALUES ('postaja1', 'polnilna postaja1', 'Ljubljana', '8:00', '20:00', '5');
+INSERT INTO postaja (ime, specifikacije, lokacija, obratovalni_cas_zacetek, obratovalni_cas_konec, cena ) VALUES ('postaja2', 'polnilna postaja2', 'Novo mesto', '9:00', '21:00', '15');
 INSERT INTO lastnistvo (postaja_id, uporabnik_id) VALUES (1, 1);
 INSERT INTO lastnistvo (postaja_id, uporabnik_id) VALUES (2, 3);
 INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (2,1,5);
 INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (3,1,2);
 INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (1,3,15);
 INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (2,1,5);
-INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacje) VALUES (2,1,"15:00","17:00");
-INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacje) VALUES (3,2,"7:00","17:00");
+INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacje) VALUES (2,1,'15:00','17:00');
+INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacje) VALUES (3,2,'7:00','17:00');
