@@ -11,6 +11,9 @@ import java.util.List;
                 //vrni vse uporabnike
                 @NamedQuery(name = "Uporabnik.getAll",
                         query = "SELECT x FROM Uporabnik x"),
+                //vrni uporabnika glede na id
+                @NamedQuery(name = "Uporabnik.getById",
+                        query = "SELECT x FROM Uporabnik x WHERE x.id= :id"),
                 //vrni vse uporabnike
                 @NamedQuery(name = "Uporabnik.getAllUsernames",
                         query = "SELECT x.uporabniskoIme FROM Uporabnik x"),

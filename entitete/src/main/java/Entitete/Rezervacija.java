@@ -1,6 +1,8 @@
 package Entitete;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name= "rezervacija")
@@ -10,7 +12,7 @@ import javax.persistence.*;
                 @NamedQuery(name = "Rezervacija.getAll",
                         query = "SELECT x FROM Rezervacija x"),
                 //vrni rezervacijo
-                @NamedQuery(name = "Rezervacija.vrniRezervacijo",
+                @NamedQuery(name = "Rezervacija.getById",
                         query = "SELECT x FROM Rezervacija x WHERE x.id = :rezervacijaId"),
                 //vrni vse rezervacije uporabnika z id
                 @NamedQuery(name = "Rezervacija.vrniRezervacijeUporabnika",
@@ -34,12 +36,14 @@ public class Rezervacija {
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "zacetek_rezervacije")
-    //LocalDateTime zacetekRezervacije;
-    private String zacetekRezervacije;
+    Date zacetekRezervacije;
+    //private String zacetekRezervacije;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "konec_rezervacije")
-    private String konecRezervacije;
-    //LocalDateTime konecRezervacije;
+    //private String konecRezervacije;
+    Date konecRezervacije;
 
     public Integer getId() {
         return id;
@@ -65,23 +69,23 @@ public class Rezervacija {
         this.postaja = postaja;
     }
 
-    /*public LocalDateTime getZacetekRezervacije() {
+    public Date getZacetekRezervacije() {
         return zacetekRezervacije;
     }
 
-    public void setZacetekRezervacije(LocalDateTime zacetekRezervacije) {
+    public void setZacetekRezervacije(Date zacetekRezervacije) {
         this.zacetekRezervacije = zacetekRezervacije;
     }
 
-    public LocalDateTime getKonecRezervacije() {
+    public Date getKonecRezervacije() {
         return konecRezervacije;
     }
 
-    public void setKonecRezervacije(LocalDateTime konecRezervacije) {
+    public void setKonecRezervacije(Date konecRezervacije) {
         this.konecRezervacije = konecRezervacije;
-    }*/
+    }
 
-    public String getZacetekRezervacije() {
+    /*public String getZacetekRezervacije() {
         return zacetekRezervacije;
     }
 
@@ -96,4 +100,6 @@ public class Rezervacija {
     public void setKonecRezervacije(String konecRezervacije) {
         this.konecRezervacije = konecRezervacije;
     }
+    */
+
 }

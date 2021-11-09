@@ -11,6 +11,9 @@ import java.util.List;
                 //vrni vse postaje
                 @NamedQuery(name = "Postaja.getAll",
                         query = "SELECT p FROM Postaja p"),
+                //vrni postajo
+                @NamedQuery(name = "Postaja.getById",
+                        query = "SELECT p FROM Postaja p WHERE p.id = :idPostaje"),
                 //vrni vse lokacije postaj
                 @NamedQuery(name = "Postaja.getAllLocations",
                         query = "SELECT p.lokacija FROM Postaja p"),
