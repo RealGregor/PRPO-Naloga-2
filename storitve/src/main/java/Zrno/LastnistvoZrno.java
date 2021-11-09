@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.UUID;
 
 @ApplicationScoped
 public class LastnistvoZrno {
@@ -21,6 +22,7 @@ public class LastnistvoZrno {
     @PostConstruct
     private void init() {
         logger.info("Incializacija zrna " + LastnistvoZrno.class.getSimpleName());
+        logger.info("Zrno z id-jem: " + UUID.randomUUID().toString());
     }
 
     @PreDestroy

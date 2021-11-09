@@ -6,14 +6,17 @@ import Entitete.Uporabnik;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
-@ApplicationScoped
+//@ApplicationScoped
+@RequestScoped
 public class PostajaZrno {
 
     private Logger logger = Logger.getLogger(PostajaZrno.class.getName());
@@ -21,6 +24,7 @@ public class PostajaZrno {
     @PostConstruct
     private void init() {
         logger.info("Incializacija zrna " + PostajaZrno.class.getSimpleName());
+        logger.info("Zrno z id-jem: " + UUID.randomUUID().toString());
     }
 
     @PreDestroy

@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 @ApplicationScoped
@@ -21,6 +22,7 @@ public class RezervacijaZrno {
     @PostConstruct
     private void init() {
         logger.info("Incializacija zrna " + RezervacijaZrno.class.getSimpleName());
+        logger.info("Zrno z id-jem: " + UUID.randomUUID().toString());
     }
 
     @PreDestroy

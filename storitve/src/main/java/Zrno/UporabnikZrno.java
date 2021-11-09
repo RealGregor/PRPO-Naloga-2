@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 
@@ -22,6 +23,7 @@ public class UporabnikZrno {
     @PostConstruct
     private void init() {
         logger.info("Incializacija zrna " + UporabnikZrno.class.getSimpleName());
+        logger.info("Zrno z id-jem: " + UUID.randomUUID().toString());
     }
 
     @PreDestroy

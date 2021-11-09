@@ -34,6 +34,12 @@ public class JPAServlet extends HttpServlet {
         Postaja postaja = postajeZrno.pridobiPostajo(1);
         resp.getWriter().println(postaja.getIme()+" "+postaja.getLokacija() + " "+ postaja.getCena() + " " + postaja.getObratovalniCasZacetek()+ " " + postaja.getObratovalniCasKonec());
 
+        //test Request and Application scope
+        postaja = postajeZrno.pridobiPostajo(1);
+
+        postaja = postajeZrno.pridobiPostajo(1);
+        //na tem mestu se zrno deinicializira, UporabnikZrno ostane
+
 
         /*uporabniki = uporabnikiZrno.getUporabnikiCriteriaAPI();
         resp.getWriter().println("Podatki o uporabnikih pridobljeni z CriteriaAPI:");
