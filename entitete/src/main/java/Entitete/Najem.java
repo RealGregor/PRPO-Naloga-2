@@ -10,7 +10,7 @@ import javax.persistence.*;
                 @NamedQuery(name = "Najem.getAll",
                         query = "SELECT x FROM Najem x"),
                 //vrni najem
-                @NamedQuery(name = "Najem.vrniNajem",
+                @NamedQuery(name = "Najem.getById",
                         query = "SELECT x FROM Najem x WHERE x.id = :najemId"),
                 //vrni vse najeme uporabnika z id
                 @NamedQuery(name = "Najem.vrniNajemeUporabnika",

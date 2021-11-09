@@ -9,6 +9,9 @@ import javax.persistence.*;
                 //vrni vsa lastnistva
                 @NamedQuery(name = "Lastnistvo.getAll",
                         query = "SELECT x FROM Lastnistvo x"),
+                //vrni lastnistvo
+                @NamedQuery(name = "Lastnistvo.getById",
+                        query = "SELECT x FROM Lastnistvo x WHERE x.id = :idLastnistva"),
                 //vrni vsa lastnistva uporabnika z id
                 @NamedQuery(name = "Lastnistvo.vrniVsaLasnistvaId",
                         query = "SELECT x.postaja FROM Lastnistvo x WHERE x.uporabnik = :uporabnikId"),
