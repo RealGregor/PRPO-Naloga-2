@@ -1,7 +1,6 @@
 package Zrno;
 
 import Entitete.Rezervacija;
-import Entitete.Uporabnik;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -43,7 +42,7 @@ public class RezervacijaZrno {
         return rezervacija;
     }
     //READ
-    public List<Rezervacija> getRezervacije() {
+    public List<Rezervacija> pridobiRezervacije() {
         Query q = em.createNamedQuery("Rezervacija.getAll");
         List<Rezervacija> resultSet = (List<Rezervacija>)q.getResultList();
         return resultSet;
