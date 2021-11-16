@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
-import java.util.UUID;
 import java.util.logging.Logger;
 
 @Interceptor
@@ -20,8 +19,7 @@ public class BelezenjeKlicevInterceptor {
 
     @AroundInvoke
     public Object BelezenjeKlicev(InvocationContext context) throws Exception {
-        belezenjeKlicevZrno.povecaj();
-        logger.info("AAAAAAAAAAAAAAAAAAAAAAAAAAA" + context.toString() +context.getMethod());
+        belezenjeKlicevZrno.povecaj(context);
         return context.proceed();
     }
 }
