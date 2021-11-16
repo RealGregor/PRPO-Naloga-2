@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-//@ApplicationScoped
-@RequestScoped
+@ApplicationScoped
+//@RequestScoped
 public class PostajaZrno {
 
     private Logger logger = Logger.getLogger(PostajaZrno.class.getName());

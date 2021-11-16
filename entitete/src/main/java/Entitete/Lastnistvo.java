@@ -1,6 +1,7 @@
 package Entitete;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name= "lastnistvo")
@@ -23,7 +24,7 @@ import javax.persistence.*;
                         query = "SELECT DISTINCT x.postaja FROM Lastnistvo x"),
         })
 
-public class Lastnistvo {
+public class Lastnistvo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lastnistvo_id")
