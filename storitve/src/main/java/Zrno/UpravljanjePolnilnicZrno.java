@@ -45,9 +45,9 @@ public class UpravljanjePolnilnicZrno {
     // 3. Rezervacije
     // 4. Najemi
 
-    public void najemPolnilnice(NajemDTO najemDTO) {
+    public Najem najemPolnilnice(NajemDTO najemDTO) {
         if (!najemDTO.validate()) {
-            return;
+            return null;
         }
         var najem = new Najem();
 
@@ -56,11 +56,13 @@ public class UpravljanjePolnilnicZrno {
         najem.setCasPolnjenja(0);
 
         najemiZrno.dodajNajem(najem);
+
+        return najem;
     }
 
-    public void rezervacijaPolnilnice(RezervacijaDTO rezervacijaDTO) {
+    public Rezervacija rezervacijaPolnilnice(RezervacijaDTO rezervacijaDTO) {
         if (!rezervacijaDTO.validate()) {
-            return;
+            return null;
         }
 
         var rezervacija = new Rezervacija();
@@ -72,17 +74,22 @@ public class UpravljanjePolnilnicZrno {
         rezervacija.setKonecRezervacije(rezervacijaDTO.getKonecRezervacije());
 
         rezervacijeZrno.dodajRezervacijo(rezervacija);
+
+        return rezervacija;
     }
 
-    public void dodajPolnilnico(DodajPostajoDTO dodajPostajaDTO){
-        if (dodajPostajaDTO ==null || dodajPostajaDTO.getUporabnik() == null) {
+    public Postaja dodajPolnilnico(DodajPostajoDTO dodajPostajaDTO) {
+        Postaja postaja = null;
+
+        if (dodajPostajaDTO == null || dodajPostajaDTO.getUporabnik() == null) {
             logger.info("Uporabnik ne obstaja. Postaje ni možno dodati");
-        }else if(dodajPostajaDTO.getPostaja() ==null ){
+        } else if (dodajPostajaDTO.getPostaja() == null) {
             logger.info("Nova postaja ni ustrezna");
-        }else if(!ustreznoDodajPostajo(dodajPostajaDTO)){
+        } else if (!ustreznoDodajPostajo(dodajPostajaDTO)) {
             logger.info("Podatki o lastniku in postaji ne ustrezajo");
-        }else{
-            var postaja = new Postaja();
+        } else {
+            postaja = new Postaja();
+
             postaja.setCena(dodajPostajaDTO.getPostaja().getCena());
             postaja.setId(dodajPostajaDTO.getPostaja().getId());
             postaja.setIme(dodajPostajaDTO.getPostaja().getIme());
@@ -91,17 +98,19 @@ public class UpravljanjePolnilnicZrno {
             postaja.setObratovalniCasZacetek(dodajPostajaDTO.getPostaja().getObratovalniCasZacetek());
             postaja.setSpecifikacije(dodajPostajaDTO.getPostaja().getSpecifikacije());
             postajeZrno.dodajPostajo(postaja);
-            //postajeZrno.dodajPostajo(dodajPostajaDTO.getPostaja());
+            // postajeZrno.dodajPostajo(dodajPostajaDTO.getPostaja());
             var lastnistvo = new Lastnistvo();
             lastnistvo.setPostaja(postaja);
             lastnistvo.setUporabnik(dodajPostajaDTO.getUporabnik());
             lastnistvaZrno.dodajLastnistvo(lastnistvo);
         }
 
+        return postaja;
     }
-    public boolean ustreznoDodajPostajo(DodajPostajoDTO dodajPostajoDTO){
-        if(postajeZrno.pridobiPostajo(dodajPostajoDTO.getPostaja().getId()) == null){
-            if(uporabnikiZrno.odstraniUporabnika(dodajPostajoDTO.getUporabnik().getId())){
+
+    public boolean ustreznoDodajPostajo(DodajPostajoDTO dodajPostajoDTO) {
+        if (postajeZrno.pridobiPostajo(dodajPostajoDTO.getPostaja().getId()) == null) {
+            if (uporabnikiZrno.odstraniUporabnika(dodajPostajoDTO.getUporabnik().getId())) {
                 return true;
             }
         }
