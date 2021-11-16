@@ -41,7 +41,7 @@ public class PostajaVir {
     }
 
     @GET
-    public Response vrniUporabnike() {
+    public Response vrniPostaje() {
 
         List<Postaja> postaje = (List<Postaja>) postajaZrno.pridobiPostaje();
         return Response.status(Response.Status.OK).entity(postaje).build();

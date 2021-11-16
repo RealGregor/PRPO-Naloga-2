@@ -55,6 +55,8 @@ public class UpravljanjePolnilnicZrno {
         najem.setPostaja(najemDTO.getPostaja());
         najem.setCasPolnjenja(0);
 
+        //TODO: additional guards for integirty?
+
         najemiZrno.dodajNajem(najem);
 
         return najem;
@@ -72,6 +74,8 @@ public class UpravljanjePolnilnicZrno {
 
         rezervacija.setZacetekRezervacije(rezervacijaDTO.getZacetekRezervacije());
         rezervacija.setKonecRezervacije(rezervacijaDTO.getKonecRezervacije());
+
+        //TODO: additional guards for integirty?
 
         rezervacijeZrno.dodajRezervacijo(rezervacija);
 

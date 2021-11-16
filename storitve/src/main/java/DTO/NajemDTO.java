@@ -11,6 +11,11 @@ public class NajemDTO extends BaseDTO{
     @Override
     public boolean validate(){
         //TODO: implement
+        if(uporabnik == null || postaja == null){
+            return false;
+        }else if(false){
+            //TODO: dodatna validacija v prihodnosti?
+        }
 
         return true;
     }
