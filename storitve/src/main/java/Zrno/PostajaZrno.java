@@ -2,6 +2,7 @@ package Zrno;
 
 import Entitete.Postaja;
 import Entitete.Uporabnik;
+import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -38,6 +39,7 @@ public class PostajaZrno {
 
     //CRUD operacije
     //CREATE
+    @BeleziKlice
     @Transactional
     public Postaja dodajPostajo(Postaja postaja){
         if(postaja != null){
@@ -47,12 +49,14 @@ public class PostajaZrno {
     }
 
     //READ
+    @BeleziKlice
     public List<Postaja> pridobiPostaje() {
         Query q = em.createNamedQuery("Postaja.getAll");
         List<Postaja> resultSet = (List<Postaja>)q.getResultList();
         return resultSet;
     }
 
+    @BeleziKlice
     public Postaja pridobiPostajo(int postajaId) {
         Query q = em.createNamedQuery("Postaja.getById");
         q.setParameter("idPostaje",postajaId);
@@ -60,6 +64,7 @@ public class PostajaZrno {
         return postaja;
     }
     //UPDATE
+    @BeleziKlice
     @Transactional
     public Postaja posodobiPostajo(int postajaId, Postaja postaja){
         Postaja p = em.find(Postaja.class, postajaId);
@@ -68,6 +73,7 @@ public class PostajaZrno {
         return postaja;
     }
     //DELETE
+    @BeleziKlice
     @Transactional
     public boolean odstraniPostajo(int postajaId) {
         Postaja postaja = pridobiPostajo(postajaId);

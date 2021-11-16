@@ -2,6 +2,7 @@ package Zrno;
 
 import Entitete.Najem;
 import Entitete.Uporabnik;
+import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -35,6 +36,7 @@ public class NajemZrno {
 
     //CRUD operacije
     //CREATE
+    @BeleziKlice
     @Transactional
     public Najem dodajNajem(Najem najem){
         if(najem != null){
@@ -43,12 +45,14 @@ public class NajemZrno {
         return najem;
     }
     //READ
+    @BeleziKlice
     public List<Najem> pridobiNajeme() {
         Query q = em.createNamedQuery("Najem.getAll");
         List<Najem> resultSet = (List<Najem>)q.getResultList();
         return resultSet;
     }
 
+    @BeleziKlice
     public Najem pridobiNajem(int najemId) {
         Query q = em.createNamedQuery("Najem.getById");
         q.setParameter("najemId",najemId);
@@ -56,6 +60,7 @@ public class NajemZrno {
         return najem;
     }
     //UPDATE
+    @BeleziKlice
     @Transactional
     public Najem posodobiNajem(int najemId, Najem najem){
         Najem n = em.find(Najem.class, najemId);
@@ -64,6 +69,7 @@ public class NajemZrno {
         return najem;
     }
     //DELETE
+    @BeleziKlice
     @Transactional
     public boolean odstraniNajem(int najemId) {
         Najem najem = pridobiNajem(najemId);

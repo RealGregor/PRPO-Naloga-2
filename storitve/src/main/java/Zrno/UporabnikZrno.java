@@ -1,6 +1,7 @@
 package Zrno;
 
 import Entitete.Uporabnik;
+import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -36,6 +37,7 @@ public class UporabnikZrno {
 
     //CRUD operacije
     //CREATE
+    @BeleziKlice
     @Transactional
     public Uporabnik dodajUporabnika(Uporabnik uporabnik){
         if(uporabnik != null){
@@ -44,12 +46,14 @@ public class UporabnikZrno {
         return uporabnik;
     }
     //READ
+    @BeleziKlice
     public List<Uporabnik> pridobiUporabnike() {
         Query q = em.createNamedQuery("Uporabnik.getAll");
         List<Uporabnik> resultSet = (List<Uporabnik>)q.getResultList();
         return resultSet;
     }
 
+    @BeleziKlice
     public Uporabnik pridobiUporabnika(int uporabnikId) {
         Query q = em.createNamedQuery("Uporabnik.getById");
         q.setParameter("id",uporabnikId);
@@ -57,6 +61,7 @@ public class UporabnikZrno {
         return uporabnik;
     }
     //UPDATE
+    @BeleziKlice
     @Transactional
     public Uporabnik posodobiUporabnika(int uporabnikId, Uporabnik uporabnik){
         Uporabnik u = em.find(Uporabnik.class, uporabnikId);
@@ -65,6 +70,7 @@ public class UporabnikZrno {
         return uporabnik;
     }
     //DELETE
+    @BeleziKlice
     @Transactional
     public boolean odstraniUporabnika(int uporabnikId) {
         Uporabnik uporabnik = pridobiUporabnika(uporabnikId);

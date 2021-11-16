@@ -5,6 +5,7 @@ import Entitete.Lastnistvo;
 import Entitete.Najem;
 import Entitete.Postaja;
 import Entitete.Rezervacija;
+import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -45,6 +46,7 @@ public class UpravljanjePolnilnicZrno {
     // 3. Rezervacije
     // 4. Najemi
 
+    @BeleziKlice
     public Najem najemPolnilnice(NajemDTO najemDTO) {
         if (!najemDTO.validate()) {
             return null;
@@ -62,6 +64,7 @@ public class UpravljanjePolnilnicZrno {
         return najem;
     }
 
+    @BeleziKlice
     public Rezervacija rezervacijaPolnilnice(RezervacijaDTO rezervacijaDTO) {
         if (!rezervacijaDTO.validate()) {
             return null;
@@ -82,6 +85,7 @@ public class UpravljanjePolnilnicZrno {
         return rezervacija;
     }
 
+    @BeleziKlice
     public Postaja dodajPolnilnico(DodajPostajoDTO dodajPostajaDTO) {
         Postaja postaja = null;
 
@@ -112,6 +116,7 @@ public class UpravljanjePolnilnicZrno {
         return postaja;
     }
 
+    @BeleziKlice
     public boolean ustreznoDodajPostajo(DodajPostajoDTO dodajPostajoDTO) {
         if (postajeZrno.pridobiPostajo(dodajPostajoDTO.getPostaja().getId()) == null) {
             if (uporabnikiZrno.odstraniUporabnika(dodajPostajoDTO.getUporabnik().getId())) {

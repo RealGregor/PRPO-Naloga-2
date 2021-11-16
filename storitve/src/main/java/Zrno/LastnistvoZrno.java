@@ -2,6 +2,7 @@ package Zrno;
 
 import Entitete.Lastnistvo;
 import Entitete.Uporabnik;
+import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -35,6 +36,7 @@ public class LastnistvoZrno {
 
     //CRUD operacije
     //CREATE
+    @BeleziKlice
     @Transactional
     public Lastnistvo dodajLastnistvo(Lastnistvo lastnistvo){
         if(lastnistvo != null){
@@ -43,12 +45,14 @@ public class LastnistvoZrno {
         return lastnistvo;
     }
     //READ
+    @BeleziKlice
     public List<Lastnistvo> pridobiLastnistva() {
         Query q = em.createNamedQuery("Lastnistvo.getAll");
         List<Lastnistvo> resultSet = (List<Lastnistvo>)q.getResultList();
         return resultSet;
     }
 
+    @BeleziKlice
     public Lastnistvo pridobiLastnistvo(int lastnistvoId) {
         Query q = em.createNamedQuery("Lastnistvo.getById");
         q.setParameter("idLastnistva",lastnistvoId);
@@ -56,6 +60,7 @@ public class LastnistvoZrno {
         return lastnistvo;
     }
     //UPDATE
+    @BeleziKlice
     @Transactional
     public Lastnistvo posodobiLastnistvo(int lastnistvoId, Lastnistvo lastnistvo){
         Lastnistvo l = em.find(Lastnistvo.class, lastnistvoId);
@@ -64,6 +69,7 @@ public class LastnistvoZrno {
         return lastnistvo;
     }
     //DELETE
+    @BeleziKlice
     @Transactional
     public boolean odstraniLastnistvo(int lastnistvoId) {
         Lastnistvo lastnistvo = pridobiLastnistvo(lastnistvoId);

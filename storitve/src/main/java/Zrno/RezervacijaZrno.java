@@ -1,6 +1,7 @@
 package Zrno;
 
 import Entitete.Rezervacija;
+import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -34,6 +35,7 @@ public class RezervacijaZrno {
 
     //CRUD operacije
     //CREATE
+    @BeleziKlice
     @Transactional
     public Rezervacija dodajRezervacijo(Rezervacija rezervacija){
         if(rezervacija != null){
@@ -42,12 +44,14 @@ public class RezervacijaZrno {
         return rezervacija;
     }
     //READ
+    @BeleziKlice
     public List<Rezervacija> pridobiRezervacije() {
         Query q = em.createNamedQuery("Rezervacija.getAll");
         List<Rezervacija> resultSet = (List<Rezervacija>)q.getResultList();
         return resultSet;
     }
 
+    @BeleziKlice
     public Rezervacija pridobiRezervacijo(int rezervacijaId) {
         Query q = em.createNamedQuery("Rezervacija.getById");
         q.setParameter("rezervacijaId",rezervacijaId);
@@ -55,6 +59,7 @@ public class RezervacijaZrno {
         return rezervacija;
     }
     //UPDATE
+    @BeleziKlice
     @Transactional
     public Rezervacija posodobiRezervacijo(int rezervacijaId, Rezervacija rezervacija){
         Rezervacija r = em.find(Rezervacija.class, rezervacijaId);
@@ -63,6 +68,7 @@ public class RezervacijaZrno {
         return rezervacija;
     }
     //DELETE
+    @BeleziKlice
     @Transactional
     public boolean odstraniRezervacijo(int rezervacijaId) {
         Rezervacija rezervacija = pridobiRezervacijo(rezervacijaId);
