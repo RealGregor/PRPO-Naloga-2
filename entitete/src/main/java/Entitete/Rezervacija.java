@@ -1,5 +1,6 @@
 package Entitete;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.util.Date;
 
@@ -27,10 +28,12 @@ public class Rezervacija {
     @Column(name = "rezervacija_id")
     private Integer id;
 
+    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
+    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;

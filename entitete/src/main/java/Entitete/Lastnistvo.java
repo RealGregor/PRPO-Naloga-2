@@ -1,5 +1,6 @@
 package Entitete;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -30,10 +31,12 @@ public class Lastnistvo implements Serializable {
     @Column(name = "lastnistvo_id")
     private Integer id;
 
+    @JsonbTransient
     @OneToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
+    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;
