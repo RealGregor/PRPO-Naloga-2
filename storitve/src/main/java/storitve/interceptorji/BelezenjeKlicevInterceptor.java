@@ -15,11 +15,13 @@ public class BelezenjeKlicevInterceptor {
     @Inject
     private BelezenjeKlicevZrno belezenjeKlicevZrno;
 
-    private Logger logger = Logger.getLogger(BelezenjeKlicevInterceptor.class.getName());
+    // private Logger logger =
+    // Logger.getLogger(BelezenjeKlicevInterceptor.class.getName());
 
     @AroundInvoke
     public Object BelezenjeKlicev(InvocationContext context) throws Exception {
         belezenjeKlicevZrno.povecaj(context);
+        // logger.info("context.getMethod() ------>" + context.getMethod());
         return context.proceed();
     }
 }
