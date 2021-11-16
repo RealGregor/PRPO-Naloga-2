@@ -20,7 +20,6 @@ public class RezervacijaDTO extends BaseDTO{
         return true;
     }
 
-
     public Date getKonecRezervacije() {
         return konecRezervacije;
     }
