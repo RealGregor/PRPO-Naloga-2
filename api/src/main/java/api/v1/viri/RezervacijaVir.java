@@ -41,7 +41,7 @@ public class RezervacijaVir {
     }
 
     @GET
-    public Response vrniUporabnike() {
+    public Response vrniRezervacije() {
 
         List<Rezervacija> rezervacije = (List<Rezervacija>) rezervacijaZrno.pridobiRezervacije();
         return Response.status(Response.Status.OK).entity(rezervacije).build();
