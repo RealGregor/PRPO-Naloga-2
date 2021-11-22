@@ -1,16 +1,14 @@
 package Zrno;
 
 import DTO.*;
-import Entitete.Lastnistvo;
-import Entitete.Najem;
-import Entitete.Postaja;
-import Entitete.Rezervacija;
+import Entitete.*;
 import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -53,14 +51,16 @@ public class UpravljanjePolnilnicZrno {
         }
         var najem = new Najem();
 
-        najem.setUporabnik(najemDTO.getUporabnik());
-        najem.setPostaja(najemDTO.getPostaja());
+        //TODO preveri ce je v tem casu polnilnica ze zasedena- trenutno v najemu ali rezervirana
+        Uporabnik uporabnik = uporabnikiZrno.pridobiUporabnika(najemDTO.getUporabnik_id());
+        Postaja postaja = postajeZrno.pridobiPostajo(najemDTO.getPostaja_id());
+
+        najem.setUporabnik(uporabnik);
+        najem.setPostaja(postaja);
         najem.setCasPolnjenja(0);
+        najem.setZacetekPolnjenja(new Date()); //now
 
-        //TODO: additional guards for integirty?
-
-        najemiZrno.dodajNajem(najem);
-
+        najemiZrno.dodajNajem(najem); //TODO: potem dodaj, da se potekli najemi izbrisejo
         return najem;
     }
 
@@ -70,59 +70,52 @@ public class UpravljanjePolnilnicZrno {
             return null;
         }
 
+        //TODO preveri ce je v tem casu polnilnica ze zasedena- trenutno v najemu ali rezervirana
+
         var rezervacija = new Rezervacija();
+        Uporabnik uporabnik = uporabnikiZrno.pridobiUporabnika(rezervacijaDTO.getUporabnik_id());
+        Postaja postaja = postajeZrno.pridobiPostajo(rezervacijaDTO.getPostaja_id());
 
-        rezervacija.setUporabnik(rezervacijaDTO.getUporabnik());
-        rezervacija.setPostaja(rezervacijaDTO.getPostaja());
-
+        rezervacija.setUporabnik(uporabnik);
+        rezervacija.setPostaja(postaja);
         rezervacija.setZacetekRezervacije(rezervacijaDTO.getZacetekRezervacije());
         rezervacija.setKonecRezervacije(rezervacijaDTO.getKonecRezervacije());
 
-        //TODO: additional guards for integirty?
-
         rezervacijeZrno.dodajRezervacijo(rezervacija);
-
         return rezervacija;
     }
 
     @BeleziKlice
-    public Postaja dodajPolnilnico(DodajPostajoDTO dodajPostajaDTO) {
-        Postaja postaja = null;
+    public Lastnistvo dodajLastnistvo(DodajLastnistvoDTO dodajLastnistvoDTO) {
 
-        if (dodajPostajaDTO == null || dodajPostajaDTO.getUporabnik() == null) {
+        if (dodajLastnistvoDTO == null || dodajLastnistvoDTO.getUporabnik_id() == null) {
             logger.info("Uporabnik ne obstaja. Postaje ni možno dodati");
-        } else if (dodajPostajaDTO.getPostaja() == null) {
+        } else if (dodajLastnistvoDTO.getPostaja_id() == null) {
             logger.info("Nova postaja ni ustrezna");
-        } else if (!ustreznoDodajPostajo(dodajPostajaDTO)) {
-            logger.info("Podatki o lastniku in postaji ne ustrezajo");
+        } else if (!ustreznoDodajLastnistvo(dodajLastnistvoDTO)) {
+            logger.info("Postajo ni mogoce dodati");
         } else {
-            postaja = new Postaja();
+            Postaja postaja = postajeZrno.pridobiPostajo(dodajLastnistvoDTO.getPostaja_id());
+            Uporabnik uporabnik = uporabnikiZrno.pridobiUporabnika(dodajLastnistvoDTO.getUporabnik_id());
 
-            postaja.setCena(dodajPostajaDTO.getPostaja().getCena());
-            postaja.setId(dodajPostajaDTO.getPostaja().getId());
-            postaja.setIme(dodajPostajaDTO.getPostaja().getIme());
-            postaja.setLokacija(dodajPostajaDTO.getPostaja().getLokacija());
-            postaja.setObratovalniCasKonec(dodajPostajaDTO.getPostaja().getObratovalniCasKonec());
-            postaja.setObratovalniCasZacetek(dodajPostajaDTO.getPostaja().getObratovalniCasZacetek());
-            postaja.setSpecifikacije(dodajPostajaDTO.getPostaja().getSpecifikacije());
-            postajeZrno.dodajPostajo(postaja);
-            // postajeZrno.dodajPostajo(dodajPostajaDTO.getPostaja());
+            if(postaja == null || uporabnik == null)return null;
+
             var lastnistvo = new Lastnistvo();
             lastnistvo.setPostaja(postaja);
-            lastnistvo.setUporabnik(dodajPostajaDTO.getUporabnik());
+            lastnistvo.setUporabnik(uporabnik);
             lastnistvaZrno.dodajLastnistvo(lastnistvo);
+            return(lastnistvo);
         }
-
-        return postaja;
+        return null;
     }
 
     @BeleziKlice
-    public boolean ustreznoDodajPostajo(DodajPostajoDTO dodajPostajoDTO) {
-        if (postajeZrno.pridobiPostajo(dodajPostajoDTO.getPostaja().getId()) == null) {
-            if (uporabnikiZrno.odstraniUporabnika(dodajPostajoDTO.getUporabnik().getId())) {
-                return true;
-            }
-        }
+    public boolean ustreznoDodajLastnistvo(DodajLastnistvoDTO dodajLastnistvoDTO) {
+        //preveri ce ze obstaja lastnistvo za to polnilnico...
+        Lastnistvo lastnistvo = lastnistvaZrno.pridobiLastnistvoPostaje(dodajLastnistvoDTO.getPostaja_id());
+        System.out.println(dodajLastnistvoDTO.getPostaja_id());
+        System.out.println(lastnistvo);
+        if(lastnistvo == null)return true;
         return false;
     }
 }

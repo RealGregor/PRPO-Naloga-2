@@ -59,6 +59,7 @@ public class RezervacijaVir {
     }
 
     @PUT
+    @Path("{id}")
     public Response posodobiRezervacijo(@PathParam("id") int id, Rezervacija rezervacija) {
         var updatedRezervacija = rezervacijaZrno.posodobiRezervacijo(id, rezervacija);
 

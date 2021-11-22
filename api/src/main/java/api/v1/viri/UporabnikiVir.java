@@ -65,6 +65,7 @@ public class UporabnikiVir {
     }
 
     @PUT
+    @Path("{id}")
     public Response posodobiUporabnika(@PathParam("id") int id, Uporabnik uporabnik) {
         var uporabnikPosodobljen = uporabnikZrno.posodobiUporabnika(id, uporabnik);
         if (uporabnikPosodobljen != null) {

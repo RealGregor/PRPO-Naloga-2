@@ -28,12 +28,10 @@ public class Rezervacija {
     @Column(name = "rezervacija_id")
     private Integer id;
 
-    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
-    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;
@@ -41,10 +39,8 @@ public class Rezervacija {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "zacetek_rezervacije")
     Date zacetekRezervacije;
-    //private String zacetekRezervacije;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "konec_rezervacije")
-    //private String konecRezervacije;
     Date konecRezervacije;
 
     public Integer getId() {

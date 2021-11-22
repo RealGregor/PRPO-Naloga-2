@@ -36,6 +36,8 @@ public class LastnistvoZrno {
 
     //CRUD operacije
     //CREATE
+
+    //uporablja se poslovna metoda
     @BeleziKlice
     @Transactional
     public Lastnistvo dodajLastnistvo(Lastnistvo lastnistvo){
@@ -56,7 +58,19 @@ public class LastnistvoZrno {
     public Lastnistvo pridobiLastnistvo(int lastnistvoId) {
         Query q = em.createNamedQuery("Lastnistvo.getById");
         q.setParameter("idLastnistva",lastnistvoId);
-        Lastnistvo lastnistvo = (Lastnistvo)q.getSingleResult();
+        Lastnistvo lastnistvo=null;
+        try{
+            lastnistvo = (Lastnistvo)q.getSingleResult();
+        }catch (Exception e){}
+        return lastnistvo;
+    }
+    public Lastnistvo pridobiLastnistvoPostaje(int postajaId) {
+        Query q = em.createNamedQuery("Lastnistvo.vrniLastnistvoPostaje");
+        q.setParameter("postajaId",postajaId);
+        Lastnistvo lastnistvo=null;
+        try{
+            lastnistvo = (Lastnistvo)q.getSingleResult();
+        }catch (Exception e){}
         return lastnistvo;
     }
     //UPDATE

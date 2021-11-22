@@ -1,6 +1,7 @@
 package Zrno;
 
 import Entitete.Postaja;
+import Entitete.Rezervacija;
 import Entitete.Uporabnik;
 import storitve.interceptorji.BeleziKlice;
 
@@ -60,7 +61,11 @@ public class PostajaZrno {
     public Postaja pridobiPostajo(int postajaId) {
         Query q = em.createNamedQuery("Postaja.getById");
         q.setParameter("idPostaje",postajaId);
-        Postaja postaja = (Postaja)q.getSingleResult();
+
+        Postaja postaja = null;
+        try{
+            postaja = (Postaja)q.getSingleResult();
+        }catch(Exception e){}
         return postaja;
     }
     //UPDATE

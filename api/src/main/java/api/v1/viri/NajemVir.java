@@ -59,6 +59,7 @@ public class NajemVir {
     }
 
     @PUT
+    @Path("{id}")
     public Response posodobiNajem(@PathParam("id") int id, Najem najem) {
         var updatednajem = najemZrno.posodobiNajem(id, najem);
 

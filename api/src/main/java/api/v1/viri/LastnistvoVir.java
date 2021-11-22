@@ -1,7 +1,9 @@
 package api.v1.viri;
 
+import DTO.DodajLastnistvoDTO;
 import Entitete.Lastnistvo;
 import Zrno.LastnistvoZrno;
+import Zrno.UpravljanjePolnilnicZrno;
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 
@@ -29,6 +31,9 @@ public class LastnistvoVir {
     @Inject
     private LastnistvoZrno lastnistvoZrno;
 
+    @Inject
+    private UpravljanjePolnilnicZrno upravljanjePolnilnicZrno;
+
     @GET
     public Response vrniLastnistva(){
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
@@ -51,8 +56,8 @@ public class LastnistvoVir {
     Storitve naj sprejemajo in vračajo JPA entitete.
     */
     @POST
-    public Response dodajLastnistvo(Lastnistvo lastnistvo) {
-        Lastnistvo novo = lastnistvoZrno.dodajLastnistvo((lastnistvo));
+    public Response dodajLastnistvo(DodajLastnistvoDTO dodajLastnistvoDTO) {
+        Lastnistvo novo = upravljanjePolnilnicZrno.dodajLastnistvo(dodajLastnistvoDTO);
         if(novo != null){
             return Response.status(Response.Status.CREATED).entity(novo).build();
         }else{
@@ -61,6 +66,7 @@ public class LastnistvoVir {
     }
 
     @PUT
+    @Path("{id}")
     public Response posodobiLastnistvo(@PathParam("id") int id, Lastnistvo lastnistvo) {
         var lastnistvoPosodobljeno = lastnistvoZrno.posodobiLastnistvo(id, lastnistvo);
         if (lastnistvoPosodobljeno != null) {

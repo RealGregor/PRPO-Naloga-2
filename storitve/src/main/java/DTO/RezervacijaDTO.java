@@ -6,8 +6,8 @@ import Entitete.Postaja;
 import Entitete.Uporabnik;
 
 public class RezervacijaDTO extends BaseDTO {
-    private Uporabnik uporabnik;
-    private Postaja postaja;
+    private Integer uporabnik_id;
+    private Integer postaja_id;
 
     private Date zacetekRezervacije;
     private Date konecRezervacije;
@@ -15,12 +15,11 @@ public class RezervacijaDTO extends BaseDTO {
     @Override
     public boolean validate() {
 
-        if (uporabnik == null || postaja == null) {
+        if (uporabnik_id == null || postaja_id == null || zacetekRezervacije == null ||konecRezervacije== null) {
             return false;
         } else if (zacetekRezervacije.after(konecRezervacije)) {
             return false;
         }
-
         return true;
     }
 
@@ -40,19 +39,19 @@ public class RezervacijaDTO extends BaseDTO {
         this.zacetekRezervacije = zacetekRezervacije;
     }
 
-    public Postaja getPostaja() {
-        return postaja;
+    public Integer getUporabnik_id() {
+        return uporabnik_id;
     }
 
-    public void setPostaja(Postaja postaja) {
-        this.postaja = postaja;
+    public void setUporabnik_id(Integer uporabnik_id) {
+        this.uporabnik_id = uporabnik_id;
     }
 
-    public Uporabnik getUporabnik() {
-        return uporabnik;
+    public Integer getPostaja_id() {
+        return postaja_id;
     }
 
-    public void setUporabnik(Uporabnik uporabnik) {
-        this.uporabnik = uporabnik;
+    public void setPostaja_id(Integer postaja_id) {
+        this.postaja_id = postaja_id;
     }
 }

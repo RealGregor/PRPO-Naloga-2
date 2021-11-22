@@ -57,7 +57,10 @@ public class UporabnikZrno {
     public Uporabnik pridobiUporabnika(int uporabnikId) {
         Query q = em.createNamedQuery("Uporabnik.getById");
         q.setParameter("id",uporabnikId);
-        Uporabnik uporabnik = (Uporabnik)q.getSingleResult();
+        Uporabnik uporabnik = null;
+        try{
+            uporabnik = (Uporabnik)q.getSingleResult();
+        }catch (Exception e){}
         return uporabnik;
     }
     //UPDATE

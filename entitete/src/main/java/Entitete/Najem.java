@@ -2,6 +2,7 @@ package Entitete;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name= "najem")
@@ -30,18 +31,20 @@ public class Najem {
     @Column(name = "rajem_id")
     private Integer id;
 
-    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;
 
-    @JsonbTransient
     @OneToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
     @Column(name = "cas_polnjenja")
     private Integer casPolnjenja;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "zacetek_polnjenja")
+    private Date zacetekPolnjenja;
 
     public Integer getId() {
         return id;
@@ -73,5 +76,12 @@ public class Najem {
 
     public void setCasPolnjenja(Integer casPolnjenja) {
         this.casPolnjenja = casPolnjenja;
+    }
+
+    public Date getZacetekPolnjenja() {
+        return zacetekPolnjenja;
+    }
+    public void setZacetekPolnjenja(Date zacetekPolnjenja) {
+        this.zacetekPolnjenja = zacetekPolnjenja;
     }
 }

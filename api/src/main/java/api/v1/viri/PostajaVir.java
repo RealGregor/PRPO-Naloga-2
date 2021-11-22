@@ -7,8 +7,6 @@ import Zrno.UpravljanjePolnilnicZrno;
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 
-import DTO.DodajPostajoDTO;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -30,10 +28,9 @@ public class PostajaVir {
     private UpravljanjePolnilnicZrno upravljanjePolnilnicZrno;
 
     @POST
-    public Response dodajPostajo(DodajPostajoDTO postajaDTO) {
-        Postaja postaja = upravljanjePolnilnicZrno.dodajPolnilnico(postajaDTO);
-
+    public Response dodajPostajo(Postaja postaja) {
         if (postaja != null) {
+            postajaZrno.dodajPostajo(postaja);
             return Response.status(Response.Status.CREATED).entity(postaja).build();
         } else {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
@@ -59,6 +56,7 @@ public class PostajaVir {
     }
 
     @PUT
+    @Path("{id}")
     public Response posodobiPostajo(@PathParam("id") int id, Postaja postaja) {
         var updatedPostaja = postajaZrno.posodobiPostajo(id, postaja);
 

@@ -1,6 +1,7 @@
 package Zrno;
 
 import Entitete.Najem;
+import Entitete.Postaja;
 import Entitete.Uporabnik;
 import storitve.interceptorji.BeleziKlice;
 
@@ -38,6 +39,7 @@ public class NajemZrno {
     //CREATE
     @BeleziKlice
     @Transactional
+    //uporablja se poslovna metoda
     public Najem dodajNajem(Najem najem){
         if(najem != null){
             em.persist(najem);
@@ -56,7 +58,10 @@ public class NajemZrno {
     public Najem pridobiNajem(int najemId) {
         Query q = em.createNamedQuery("Najem.getById");
         q.setParameter("najemId",najemId);
-        Najem najem = (Najem)q.getSingleResult();
+        Najem najem = null;
+        try{
+            najem = (Najem)q.getSingleResult();
+        }catch(Exception e){}
         return najem;
     }
     //UPDATE

@@ -43,15 +43,15 @@ public class Uporabnik implements Serializable{
     private String uporabniskoIme;
 
     @JsonbTransient
-    @OneToMany(mappedBy = "uporabnik")
+    @OneToMany(mappedBy = "uporabnik", cascade = CascadeType.ALL)
     private List<Najem> najemi;
 
     @JsonbTransient
-    @OneToMany(mappedBy = "uporabnik")
+    @OneToMany(mappedBy = "uporabnik", cascade = CascadeType.ALL)
     private List<Lastnistvo> lastnistva;
 
     @JsonbTransient
-    @OneToMany(mappedBy = "uporabnik")
+    @OneToMany(mappedBy = "uporabnik", cascade = CascadeType.ALL)
     private List<Rezervacija> rezervacije;
 
     //getters and setters

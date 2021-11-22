@@ -18,8 +18,8 @@ import java.io.Serializable;
                 @NamedQuery(name = "Lastnistvo.vrniVsaLasnistvaId",
                         query = "SELECT x.postaja FROM Lastnistvo x WHERE x.uporabnik = :uporabnikId"),
                 //vrni vsa lastnike neke polnilnice
-                @NamedQuery(name = "Lastnistvo.vrniVseLastnike",
-                        query = "SELECT x.uporabnik FROM Lastnistvo x WHERE x.postaja = :postajaId"),
+                @NamedQuery(name = "Lastnistvo.vrniLastnistvoPostaje",
+                        query = "SELECT x FROM Lastnistvo x WHERE x.postaja.id = :postajaId"),
                 //vrni vse postaje
                 @NamedQuery(name = "Lastnistvo.vrniVsePostaje",
                         query = "SELECT DISTINCT x.postaja FROM Lastnistvo x"),
@@ -31,12 +31,10 @@ public class Lastnistvo implements Serializable {
     @Column(name = "lastnistvo_id")
     private Integer id;
 
-    @JsonbTransient
     @OneToOne
     @JoinColumn(name = "postaja_id")
     private Postaja postaja;
 
-    @JsonbTransient
     @ManyToOne
     @JoinColumn(name = "uporabnik_id")
     private Uporabnik uporabnik;

@@ -55,7 +55,10 @@ public class RezervacijaZrno {
     public Rezervacija pridobiRezervacijo(int rezervacijaId) {
         Query q = em.createNamedQuery("Rezervacija.getById");
         q.setParameter("rezervacijaId",rezervacijaId);
-        Rezervacija rezervacija = (Rezervacija)q.getSingleResult();
+        Rezervacija rezervacija = null;
+        try{
+            rezervacija = (Rezervacija)q.getSingleResult();
+        }catch(Exception e){}
         return rezervacija;
     }
     //UPDATE
