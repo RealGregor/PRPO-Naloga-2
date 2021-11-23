@@ -39,6 +39,7 @@ public class Rezervacija {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "zacetek_rezervacije")
     Date zacetekRezervacije;
+    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "konec_rezervacije")
     Date konecRezervacije;

@@ -1,6 +1,8 @@
+ALTER TABLE rezervacija ADD CONSTRAINT tbl_no_overlapping_time_ranges EXCLUDE USING gist (tsrange(zacetek_rezervacije, konec_rezervacije) WITH &&)
+
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Petra', 'Kos', 'petrakos', 'petra.kos@hotmail.com');
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Miha', 'Novak', 'mihanovak', 'miha.novak@gmail.com');
-INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Ime1', 'Priimek1', 'imePriimek1', 'email1');
+INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Ime421', 'Priimek1', 'imePriimek1', 'email1');
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Ime2', 'Priimek2', 'imePriimek2', 'email2');
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Ime3', 'Priimek3', 'imePriimek3', 'email3');
 INSERT INTO uporabnik (ime, priimek, uporabnisko_ime, email) VALUES ('Ime4', 'Priimek4', 'imePriimek4', 'email4');
@@ -18,14 +20,14 @@ INSERT INTO lastnistvo (postaja_id, uporabnik_id) VALUES (2, 2);
 INSERT INTO lastnistvo (postaja_id, uporabnik_id) VALUES (3, 4);
 INSERT INTO lastnistvo (postaja_id, uporabnik_id) VALUES (4, 3);
 INSERT INTO lastnistvo (postaja_id, uporabnik_id) VALUES (4, 5);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (2,1,5);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (1,2,2);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (3,3,15);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (4,7,5);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (4,8,5);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (3,2,5);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (4,5,5);
-INSERT INTO najem (postaja_id, uporabnik_id, cas_polnjenja) VALUES (4,6,5);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja, cas_polnjenja) VALUES (2,1,'2022-06-22 12:10:25',5);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (1,2, '2022-06-22 12:10:25',2);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (3,3, '2022-06-22 12:10:25',15);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (4,7, '2022-06-22 11:10:25',5);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (4,8, '2022-08-22 11:10:25',5);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (3,2, '2022-07-22 11:10:25',5);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (4,5, '2022-09-22 11:10:25',5);
+INSERT INTO najem (postaja_id, uporabnik_id,zacetek_polnjenja cas_polnjenja) VALUES (4,6, '2022-03-22 11:10:25',5);
 INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacije) VALUES (2,1,'2015-06-22 19:10:25','2015-06-22 21:10:25');
 INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacije) VALUES (1,2,'2016-06-22 19:10:25','2016-06-22 21:10:25');
 INSERT INTO rezervacija (postaja_id, uporabnik_id, zacetek_rezervacije, konec_rezervacije) VALUES (3,2,'2017-06-22 19:10:25','2017-06-22 22:10:25');

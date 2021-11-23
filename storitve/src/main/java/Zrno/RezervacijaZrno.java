@@ -26,56 +26,66 @@ public class RezervacijaZrno {
     }
 
     @PreDestroy
-    private void destroy(){
+    private void destroy() {
         logger.info("Deinicializacija zrna " + RezervacijaZrno.class.getSimpleName());
     }
 
     @PersistenceContext(unitName = "lokacijski-opomniki-jpa")
     private EntityManager em;
 
-    //CRUD operacije
-    //CREATE
+    // CRUD operacije
+    // CREATE
     @BeleziKlice
     @Transactional
-    public Rezervacija dodajRezervacijo(Rezervacija rezervacija){
-        if(rezervacija != null){
-            em.persist(rezervacija);
+    public Rezervacija dodajRezervacijo(Rezervacija rezervacija) {
+        if (rezervacija != null) {
+            try {
+                em.persist(rezervacija);
+            } catch (Exception e) {
+                logger.info(
+                        "ERROR: conflicting key value violates exclusion constraint 'tbl_no_overlapping_time_ranges'");
+                return null;
+            }
         }
         return rezervacija;
     }
-    //READ
+
+    // READ
     @BeleziKlice
     public List<Rezervacija> pridobiRezervacije() {
         Query q = em.createNamedQuery("Rezervacija.getAll");
-        List<Rezervacija> resultSet = (List<Rezervacija>)q.getResultList();
+        List<Rezervacija> resultSet = (List<Rezervacija>) q.getResultList();
         return resultSet;
     }
 
     @BeleziKlice
     public Rezervacija pridobiRezervacijo(int rezervacijaId) {
         Query q = em.createNamedQuery("Rezervacija.getById");
-        q.setParameter("rezervacijaId",rezervacijaId);
+        q.setParameter("rezervacijaId", rezervacijaId);
         Rezervacija rezervacija = null;
-        try{
-            rezervacija = (Rezervacija)q.getSingleResult();
-        }catch(Exception e){}
+        try {
+            rezervacija = (Rezervacija) q.getSingleResult();
+        } catch (Exception e) {
+        }
         return rezervacija;
     }
-    //UPDATE
+
+    // UPDATE
     @BeleziKlice
     @Transactional
-    public Rezervacija posodobiRezervacijo(int rezervacijaId, Rezervacija rezervacija){
+    public Rezervacija posodobiRezervacijo(int rezervacijaId, Rezervacija rezervacija) {
         Rezervacija r = em.find(Rezervacija.class, rezervacijaId);
         rezervacija.setId(r.getId());
         em.merge(rezervacija);
         return rezervacija;
     }
-    //DELETE
+
+    // DELETE
     @BeleziKlice
     @Transactional
     public boolean odstraniRezervacijo(int rezervacijaId) {
         Rezervacija rezervacija = pridobiRezervacijo(rezervacijaId);
-        if(rezervacija != null) {
+        if (rezervacija != null) {
             em.remove(rezervacija);
             return true;
         }
