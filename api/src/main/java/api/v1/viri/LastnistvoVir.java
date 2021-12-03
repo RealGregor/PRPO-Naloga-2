@@ -37,8 +37,9 @@ public class LastnistvoVir {
     @GET
     public Response vrniLastnistva(){
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
-        List<Lastnistvo> lastnistva = (List<Lastnistvo>) lastnistvoZrno.pridobiLastnistva();
-        return Response.status(Response.Status.OK).entity(lastnistva).build();
+        List<Lastnistvo> lastnistva = (List<Lastnistvo>) lastnistvoZrno.pridobiLastnistva(query);
+        Long steviloLastnistev = lastnistvoZrno.pridobiLastnistvaCount(query);
+        return Response.status(Response.Status.OK).entity(lastnistva).header("X-Total-Count", steviloLastnistev).build();
     }
     @GET
     @Path("{id}")
@@ -50,11 +51,7 @@ public class LastnistvoVir {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
-    /*
-    Za CDI zrna s CRUD operacijami, ki ste jih implementirali v prejšnji nalogi,
-    dodajte vire REST (npr. UporabnikiVir), v katerih njihove metode izpostavite kot storitve REST.
-    Storitve naj sprejemajo in vračajo JPA entitete.
-    */
+
     @POST
     public Response dodajLastnistvo(DodajLastnistvoDTO dodajLastnistvoDTO) {
         Lastnistvo novo = upravljanjePolnilnicZrno.dodajLastnistvo(dodajLastnistvoDTO);

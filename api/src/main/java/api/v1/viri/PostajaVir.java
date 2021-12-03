@@ -6,12 +6,15 @@ import Zrno.PostajaZrno;
 import Zrno.UpravljanjePolnilnicZrno;
 
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @ApplicationScoped
@@ -20,6 +23,9 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS")
 public class PostajaVir {
+
+    @Context
+    protected UriInfo uriInfo;
 
     @Inject
     private PostajaZrno postajaZrno;
@@ -39,9 +45,10 @@ public class PostajaVir {
 
     @GET
     public Response vrniPostaje() {
-
-        List<Postaja> postaje = (List<Postaja>) postajaZrno.pridobiPostaje();
-        return Response.status(Response.Status.OK).entity(postaje).build();
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Postaja> postaje = (List<Postaja>) postajaZrno.pridobiPostaje(query);
+        Long steviloPostaj = postajaZrno.pridobiPostajeCount(query);
+        return Response.status(Response.Status.OK).entity(postaje).header("X-Total-Count", steviloPostaj).build();
     }
 
     @GET

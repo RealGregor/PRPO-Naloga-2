@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class UporabnikiVir {
 
     private Logger logger = Logger.getLogger(UporabnikiVir.class.getName());
+
     @Context
     protected UriInfo uriInfo;
 
@@ -36,8 +37,9 @@ public class UporabnikiVir {
    @GET
     public Response vrniUporabnike(){
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
-        List<Uporabnik> uporabniki = (List<Uporabnik>) uporabnikZrno.pridobiUporabnike();
-        return Response.status(Response.Status.OK).entity(uporabniki).build();
+        List<Uporabnik> uporabniki = (List<Uporabnik>) uporabnikZrno.pridobiUporabnike(query);
+        Long steviloUporabnikov = uporabnikZrno.pridobiUporabnikeCount(query);
+        return Response.status(Response.Status.OK).entity(uporabniki).header("X-Total-Count", steviloUporabnikov).build();
     }
     @GET
     @Path("{id}")
@@ -49,11 +51,7 @@ public class UporabnikiVir {
            return Response.status(Response.Status.NOT_FOUND).build();
        }
     }
-    /*
-    Za CDI zrna s CRUD operacijami, ki ste jih implementirali v prejšnji nalogi,
-    dodajte vire REST (npr. UporabnikiVir), v katerih njihove metode izpostavite kot storitve REST.
-    Storitve naj sprejemajo in vračajo JPA entitete.
-    */
+
     @POST
     public Response dodajUporabnika(Uporabnik uporabnik) {
         Uporabnik u = uporabnikZrno.dodajUporabnika((uporabnik));

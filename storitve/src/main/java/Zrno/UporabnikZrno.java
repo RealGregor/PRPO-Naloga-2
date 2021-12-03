@@ -1,6 +1,8 @@
 package Zrno;
 
 import Entitete.Uporabnik;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
@@ -51,6 +53,16 @@ public class UporabnikZrno {
         Query q = em.createNamedQuery("Uporabnik.getAll");
         List<Uporabnik> resultSet = (List<Uporabnik>)q.getResultList();
         return resultSet;
+    }
+
+    @BeleziKlice
+    public List<Uporabnik> pridobiUporabnike(QueryParameters query) {
+        List<Uporabnik> uporabniki = (List<Uporabnik>) JPAUtils.queryEntities(em, Uporabnik.class, query);
+        return uporabniki;
+    }
+
+    public Long pridobiUporabnikeCount(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(em, Uporabnik.class, query);
     }
 
     @BeleziKlice

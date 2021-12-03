@@ -1,0 +1,13 @@
+UPORABNIKI - GET s postman ali v brskalniku
+http://localhost:8080/v1/uporabniki?order=id DESC
+http://localhost:8080/v1/uporabniki?offset=5&limit=5
+http://localhost:8080/v1/uporabniki?filter=id:EQ:1
+http://localhost:8080/v1/uporabniki?filter=id:GT:5
+http://localhost:8080/v1/uporabniki?fields=id,email
+
+http://localhost:8080/v1/rezervacije?filter=uporabnik.id:EQ:1
+http://localhost:8080/v1/rezervacije?filter=postaja.id:EQ:1
+http://localhost:8080/v1/rezervacije?filter=postaja.id:EQ:1 uporabnik.id:EQ:3
+
+
+

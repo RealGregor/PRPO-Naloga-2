@@ -1,7 +1,10 @@
 package Zrno;
 
 import Entitete.Lastnistvo;
+import Entitete.Najem;
 import Entitete.Uporabnik;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
@@ -52,6 +55,16 @@ public class LastnistvoZrno {
         Query q = em.createNamedQuery("Lastnistvo.getAll");
         List<Lastnistvo> resultSet = (List<Lastnistvo>)q.getResultList();
         return resultSet;
+    }
+
+    @BeleziKlice
+    public List<Lastnistvo> pridobiLastnistva(QueryParameters query) {
+        List<Lastnistvo> lastnistva = (List<Lastnistvo>) JPAUtils.queryEntities(em, Lastnistvo.class, query);
+        return lastnistva;
+    }
+
+    public Long pridobiLastnistvaCount(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(em, Lastnistvo.class, query);
     }
 
     @BeleziKlice

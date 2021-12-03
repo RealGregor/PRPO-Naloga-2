@@ -7,12 +7,15 @@ import Zrno.UpravljanjePolnilnicZrno;
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 
 import DTO.NajemDTO;
+import com.kumuluz.ee.rest.beans.QueryParameters;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 @ApplicationScoped
@@ -21,6 +24,9 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS")
 public class NajemVir {
+
+    @Context
+    protected UriInfo uriInfo;
 
     @Inject
     private NajemZrno najemZrno;
@@ -41,9 +47,10 @@ public class NajemVir {
 
     @GET
     public Response vrniNajeme() {
-
-        List<Najem> postaje = (List<Najem>) najemZrno.pridobiNajeme();
-        return Response.status(Response.Status.OK).entity(postaje).build();
+        QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
+        List<Najem> postaje = (List<Najem>) najemZrno.pridobiNajeme(query);
+        Long steviloNajemov = najemZrno.pridobiNajemeCount(query);
+        return Response.status(Response.Status.OK).entity(postaje).header("X-Total-Count", steviloNajemov).build();
     }
 
     @GET

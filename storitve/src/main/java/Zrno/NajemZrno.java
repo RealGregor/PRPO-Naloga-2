@@ -2,7 +2,10 @@ package Zrno;
 
 import Entitete.Najem;
 import Entitete.Postaja;
+import Entitete.Rezervacija;
 import Entitete.Uporabnik;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
@@ -52,6 +55,16 @@ public class NajemZrno {
         Query q = em.createNamedQuery("Najem.getAll");
         List<Najem> resultSet = (List<Najem>)q.getResultList();
         return resultSet;
+    }
+
+    @BeleziKlice
+    public List<Najem> pridobiNajeme(QueryParameters query) {
+        List<Najem> najemi = (List<Najem>) JPAUtils.queryEntities(em, Najem.class, query);
+        return najemi;
+    }
+
+    public Long pridobiNajemeCount(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(em, Najem.class, query);
     }
 
     @BeleziKlice

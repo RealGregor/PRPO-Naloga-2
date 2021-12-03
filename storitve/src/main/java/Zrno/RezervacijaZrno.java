@@ -1,6 +1,9 @@
 package Zrno;
 
 import Entitete.Rezervacija;
+import Entitete.Uporabnik;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 import storitve.interceptorji.BeleziKlice;
 
 import javax.annotation.PostConstruct;
@@ -56,6 +59,16 @@ public class RezervacijaZrno {
         Query q = em.createNamedQuery("Rezervacija.getAll");
         List<Rezervacija> resultSet = (List<Rezervacija>) q.getResultList();
         return resultSet;
+    }
+
+    @BeleziKlice
+    public List<Rezervacija> pridobiRezervacije(QueryParameters query) {
+        List<Rezervacija> rezervacije = (List<Rezervacija>) JPAUtils.queryEntities(em, Rezervacija.class, query);
+        return rezervacije;
+    }
+
+    public Long pridobiRezervacijeCount(QueryParameters query) {
+        return JPAUtils.queryEntitiesCount(em, Rezervacija.class, query);
     }
 
     @BeleziKlice
