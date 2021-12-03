@@ -36,13 +36,13 @@
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.openapi</groupId>
-            <artifactId>kumuluzee-openapi</artifactId>
-            <version>${kumuluzee-openapi.version}</version>
+            <artifactId>kumuluzee-openapi-mp</artifactId>
+            <version>1.4.0</version>
         </dependency>
         <dependency>
-            <groupId>com.kumuluz.ee.openapi</groupId>
-            <artifactId>kumuluzee-openapi-ui</artifactId>
-            <version>${kumuluzee-openapi.version}</version>
+            <groupId>com.kumuluz.ee.config</groupId>
+            <artifactId>kumuluzee-config-mp</artifactId>
+            <version>1.4.1</version>
         </dependency>
         <dependency>
             <groupId>com.kumuluz.ee.cors</groupId>
