@@ -3,6 +3,7 @@ package Zrno;
 import DTO.*;
 import Entitete.*;
 import storitve.interceptorji.BeleziKlice;
+import storitve.izjeme.InvalidDateRangeException;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -132,7 +133,7 @@ public class UpravljanjePolnilnicZrno {
             // najem zacne v tem terminu
             if (startMax.before(endMin)) {
                 logger.info("Postaja je ze najeta v tem terminu");
-                return null;
+                throw new InvalidDateRangeException("Zacetek rezervacije mora biti pred koncem rezervacije.");
             }
         }
 

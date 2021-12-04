@@ -18,8 +18,6 @@ public class NajemDTO extends BaseDTO{
         //TODO: implement
         if(uporabnik_id == null || postaja_id == null){
             return false;
-        }else if(false){
-            //TODO: dodatna validacija v prihodnosti?
         }
         return true;
     }

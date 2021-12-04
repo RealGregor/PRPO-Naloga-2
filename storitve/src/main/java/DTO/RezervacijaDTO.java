@@ -2,6 +2,8 @@ package DTO;
 
 import java.util.Date;
 
+import storitve.izjeme.InvalidDateRangeException;
+
 public class RezervacijaDTO extends BaseDTO {
     private Integer uporabnik_id;
     private Integer postaja_id;
@@ -15,11 +17,11 @@ public class RezervacijaDTO extends BaseDTO {
         if (uporabnik_id == null || postaja_id == null || zacetekRezervacije == null ||konecRezervacije== null) {
             return false;
         } else if (zacetekRezervacije.after(konecRezervacije)) {
+            throw new InvalidDateRangeException("Zacetek rezervacije mora biti pred koncem rezervacije.");
             //nemore rezervirati negativen range
-            return false;
         }else if(zacetekRezervacije.before(new Date())){
             //nemore rezervirati v preteklosti
-            return false;
+            throw new InvalidDateRangeException("Zacetek rezervacije mora biti za danasnjim datumom.");
         }
         return true;
     }
