@@ -9,5 +9,7 @@ http://localhost:8080/v1/rezervacije?filter=uporabnik.id:EQ:1
 http://localhost:8080/v1/rezervacije?filter=postaja.id:EQ:1
 http://localhost:8080/v1/rezervacije?filter=postaja.id:EQ:1 uporabnik.id:EQ:3
 
+http://localhost:8080/api-specs/ui
+http://localhost:8080/openapi
 
 

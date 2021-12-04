@@ -6,6 +6,14 @@ import Zrno.LastnistvoZrno;
 import Zrno.UpravljanjePolnilnicZrno;
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import com.kumuluz.ee.rest.beans.QueryParameters;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -34,6 +42,16 @@ public class LastnistvoVir {
     @Inject
     private UpravljanjePolnilnicZrno upravljanjePolnilnicZrno;
 
+    @Operation(description = "Vrne seznam lastnistev.", summary = "Seznam lastnistev")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "Seznam lastnistev.",
+                    content = @Content(
+                            schema = @Schema(implementation = Lastnistvo.class)),
+                    headers = {@Header(name = "X-Total-Count", description = "Število vrnjenih lastnistev.")}
+            ),
+            @APIResponse(responseCode = "404", description = "Lastnistvo not found")
+    })
     @GET
     public Response vrniLastnistva(){
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
@@ -41,9 +59,21 @@ public class LastnistvoVir {
         Long steviloLastnistev = lastnistvoZrno.pridobiLastnistvaCount(query);
         return Response.status(Response.Status.OK).entity(lastnistva).header("X-Total-Count", steviloLastnistev).build();
     }
+
+    @Operation(description = "Vrne podrobnosti lastnistva.", summary = "Podrobnosti lastnistva")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "Podrobnosti lastnistva.",
+                    content = @Content(
+                            schema = @Schema(implementation = Lastnistvo.class))
+            ),
+            @APIResponse(responseCode = "404", description = "Lastnistvo ne obstaja")
+    })
     @GET
     @Path("{id}")
-    public Response vrniLastnistvo(@PathParam("id") int id){
+    public Response vrniLastnistvo(@Parameter(
+            description = "Identifikator lastnistva.",
+            required = true) @PathParam("id") int id){
         Lastnistvo lastnistvo = lastnistvoZrno.pridobiLastnistvo(id);
         if(lastnistvo != null){
             return Response.status(Response.Status.OK).entity(lastnistvo).build();
@@ -52,8 +82,19 @@ public class LastnistvoVir {
         }
     }
 
+    @Operation(description = "Dodaj lastnistvo.", summary = "Dodajanje lastnistva")
+    @APIResponses({
+            @APIResponse(responseCode = "201",
+                    description = "Lastnistvo uspešno dodan."
+            ),
+            @APIResponse(responseCode = "405", description = "Validacijska napaka."),
+    })
     @POST
-    public Response dodajLastnistvo(DodajLastnistvoDTO dodajLastnistvoDTO) {
+    public Response dodajLastnistvo(@RequestBody(
+            description = "DTO objekt za dodajanje lastnistva.",
+            required = true,
+            content = @Content(
+                    schema = @Schema(implementation = Lastnistvo.class))) DodajLastnistvoDTO dodajLastnistvoDTO) {
         Lastnistvo novo = upravljanjePolnilnicZrno.dodajLastnistvo(dodajLastnistvoDTO);
         if(novo != null){
             return Response.status(Response.Status.CREATED).entity(novo).build();
@@ -62,9 +103,22 @@ public class LastnistvoVir {
         }
     }
 
+    @Operation(description = "Posodobi lastnistvo.", summary = "Posodabljanje lastnistva")
+    @APIResponses({
+            @APIResponse(
+                    responseCode = "200",
+                    description = "Lasnistvo uspešno posodobljen."),
+            @APIResponse(responseCode = "404", description = "Lasnistvo ne obstaja")
+    })
     @PUT
     @Path("{id}")
-    public Response posodobiLastnistvo(@PathParam("id") int id, Lastnistvo lastnistvo) {
+    public Response posodobiLastnistvo(@Parameter(
+            description = "Identifikator lastnistva.",
+            required = true) @PathParam("id") int id, @RequestBody(
+            description = "Objekt za posodobitev lastnistva.",
+            required = true,
+            content = @Content(
+                    schema = @Schema(implementation = Lastnistvo.class))) Lastnistvo lastnistvo) {
         var lastnistvoPosodobljeno = lastnistvoZrno.posodobiLastnistvo(id, lastnistvo);
         if (lastnistvoPosodobljeno != null) {
             return Response.status(Response.Status.OK).entity(lastnistvoPosodobljeno).build();
@@ -73,9 +127,21 @@ public class LastnistvoVir {
         }
     }
 
+    @Operation(description = "Izbriši lastnistvo.", summary = "Brisanje lastnistva")
+    @APIResponses({
+            @APIResponse(
+                    responseCode = "204",
+                    description = "Lastnistvo uspešno izbrisano."
+            ),
+            @APIResponse(
+                    responseCode = "404",
+                    description = "Lastnistvo ne obstaja.")
+    })
     @DELETE
     @Path("{id}")
-    public Response odstraniLastnistvo(@PathParam("id") int id) {
+    public Response odstraniLastnistvo(@Parameter(
+            description = "Identifikator lastnistva.",
+            required = true) @PathParam("id") int id) {
         var success = lastnistvoZrno.odstraniLastnistvo(id);
         if (success) {
             return Response.status(Response.Status.OK).entity(success).build();

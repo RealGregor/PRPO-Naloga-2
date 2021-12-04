@@ -67,7 +67,8 @@ public class UporabnikiVir {
                     description = "Podrobnosti uporabnika.",
                     content = @Content(
                             schema = @Schema(implementation = Uporabnik.class))
-            )
+            ),
+            @APIResponse(responseCode = "404", description = "Uporabnik ne obstaja")
     })
     @GET
     @Path("{id}")
@@ -88,7 +89,7 @@ public class UporabnikiVir {
             @APIResponse(responseCode = "201",
                     description = "Uporabnik uspešno dodan."
             ),
-            @APIResponse(responseCode = "405", description = "Validacijska napaka.")
+            @APIResponse(responseCode = "405", description = "Validacijska napaka."),
     })
     @POST
     public Response dodajUporabnika(@RequestBody(
@@ -108,7 +109,8 @@ public class UporabnikiVir {
     @APIResponses({
             @APIResponse(
                     responseCode = "200",
-                    description = "uporabniki uspešno posodobljen.")
+                    description = "uporabnik uspešno posodobljen."),
+            @APIResponse(responseCode = "404", description = "Uporabnik ne obstaja")
     })
     @PUT
     @Path("{id}")
