@@ -5,9 +5,10 @@ package storitve.preslikovalci;
  */
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 
 import storitve.izjeme.InvalidDateRangeException;
-
+@Provider
 public class InvalidDateRangeExceptionMapper implements ExceptionMapper<InvalidDateRangeException>{
 
     @Override
