@@ -2,6 +2,7 @@ package Zrno;
 
 import DTO.*;
 import Entitete.*;
+import com.kumuluz.ee.configuration.utils.ConfigurationUtil;
 import storitve.interceptorji.BeleziKlice;
 import storitve.izjeme.InvalidDateRangeException;
 
@@ -9,8 +10,17 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.InternalServerErrorException;
+import javax.ws.rs.ProcessingException;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import java.io.Console;
+import java.net.http.HttpResponse;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -19,6 +29,12 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class UpravljanjePolnilnicZrno {
     private Logger logger = Logger.getLogger(UporabnikZrno.class.getName());
+
+    private Client httpClient;
+    private String baseUrl;
+
+    private Client httpClientRezervacije;
+    private String baseUrlRezervacije;
 
     @Inject
     private UporabnikZrno uporabnikiZrno;
@@ -33,6 +49,12 @@ public class UpravljanjePolnilnicZrno {
 
     @PostConstruct
     private void init() {
+        httpClient = ClientBuilder.newClient();
+        baseUrl= ConfigurationUtil.getInstance().get("integrations.nazadnje.base-url").orElse("http://localhost:8081/v1");
+
+        httpClientRezervacije = ClientBuilder.newClient();
+        baseUrlRezervacije = ConfigurationUtil.getInstance().get("integrations.rezervacije.base-url").orElse("http://localhost:8082/v1");
+
         logger.info("Incializacija zrna " + UpravljanjePolnilnicZrno.class.getSimpleName());
         logger.info("Zrno z id-jem: " + UUID.randomUUID().toString());
     }
@@ -152,7 +174,45 @@ public class UpravljanjePolnilnicZrno {
 
         rezervacijeZrno.dodajRezervacijo(rezervacija);
 
+        //dodaj novo rezervacijo neke postaje v drugo mikrostoritev
+        posodobiZadnjeTriRezerviranePostaje(rezervacijaDTO.getPostaja_id());
+        //posodobi dnevno stevilo rezervacij postaje
+        posodobiSteviloRezervacij(rezervacijaDTO.getPostaja_id());
+
         return rezervacija;
+    }
+
+    public void posodobiSteviloRezervacij(int postaja_id){
+        try{
+            httpClientRezervacije
+                    .target(baseUrlRezervacije +"/rezervacije/"+postaja_id)
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.json(""));
+        }catch (WebApplicationException | ProcessingException e){
+            logger.severe(e.getMessage());
+            throw new InternalServerErrorException(e);
+        }
+    }
+
+    public void posodobiZadnjeTriRezerviranePostaje(int postaja_id){
+        Postaja postaja = postajeZrno.pridobiPostajo(postaja_id);
+        PostajeDTO postajaDTO = new PostajeDTO();
+        postajaDTO.setIme(postaja.getIme());
+        postajaDTO.setSpecifikacije(postaja.getSpecifikacije());
+        postajaDTO.setLokacija(postaja.getLokacija());
+        postajaDTO.setCena(postaja.getCena());
+        postajaDTO.setObratovalniCasZacetek(postaja.getObratovalniCasZacetek());
+        postajaDTO.setObratovalniCasKonec(postaja.getObratovalniCasKonec());
+
+        try{
+            httpClient
+                    .target(baseUrl +"/zadnje_postaje")
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.json(postajaDTO));
+        }catch (WebApplicationException | ProcessingException e){
+            logger.severe(e.getMessage());
+            throw new InternalServerErrorException(e);
+        }
     }
 
     @BeleziKlice

@@ -5,6 +5,7 @@ import Zrno.UporabnikZrno;
 import Zrno.UpravljanjePolnilnicZrno;
 import com.kumuluz.ee.cors.annotations.CrossOrigin;
 import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.security.annotations.Secure;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.headers.Header;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -14,7 +15,10 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -24,7 +28,8 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.logging.Logger;
 
-@ApplicationScoped
+
+@RequestScoped
 @Path("uporabniki")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -53,6 +58,7 @@ public class UporabnikiVir {
             ),
             @APIResponse(responseCode = "404", description = "Uporabniki not found")
     })
+    //@RolesAllowed("user")
     @GET
     public Response vrniUporabnike(){
         QueryParameters query = QueryParameters.query(uriInfo.getRequestUri().getQuery()).build();
@@ -71,6 +77,7 @@ public class UporabnikiVir {
             @APIResponse(responseCode = "404", description = "Uporabnik ne obstaja")
     })
     @GET
+    //@RolesAllowed("user")
     @Path("{id}")
     public Response vrniUporabnika(@Parameter(
             description = "Identifikator uporabnika.",
@@ -91,6 +98,7 @@ public class UporabnikiVir {
             ),
             @APIResponse(responseCode = "405", description = "Validacijska napaka."),
     })
+    //@RolesAllowed("user")
     @POST
     public Response dodajUporabnika(@RequestBody(
             description = "Objekt za dodajanje uporabnika.",
@@ -112,6 +120,7 @@ public class UporabnikiVir {
                     description = "uporabnik uspešno posodobljen."),
             @APIResponse(responseCode = "404", description = "Uporabnik ne obstaja")
     })
+    //@RolesAllowed("user")
     @PUT
     @Path("{id}")
     public Response posodobiUporabnika(@Parameter(
@@ -133,7 +142,6 @@ public class UporabnikiVir {
         }
     }
 
-
     @Operation(description = "Izbriši uporabnika.", summary = "Brisanje uporabnika")
     @APIResponses({
             @APIResponse(
@@ -144,6 +152,7 @@ public class UporabnikiVir {
                     responseCode = "404",
                     description = "Uporabnik ne obstaja.")
     })
+    //@RolesAllowed("admin")
     @DELETE
     @Path("{id}")
     public Response odstraniUporabnika(@Parameter(

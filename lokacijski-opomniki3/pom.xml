@@ -2,19 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>lokacijski-opomniki</artifactId>
-        <groupId>si.fri.prpo.lokacijskiopomniki</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>api</artifactId>
+    <groupId>si.fri.prpo.lokacijskiOpomniki</groupId>
+    <artifactId>lokacijski-opomniki-rezervacije</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
+
+        <kumuluzee.version>3.12.2</kumuluzee.version>
+        <kumuluzee-rest.version>1.5.1</kumuluzee-rest.version>
+        <kumuluzee-openapi-mp.version>1.4.0</kumuluzee-openapi-mp.version>
+        <kumuluzee-cors.version>1.0.6</kumuluzee-cors.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.kumuluz.ee</groupId>
+                <artifactId>kumuluzee-bom</artifactId>
+                <version>${kumuluzee.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -35,43 +49,13 @@
             <version>${kumuluzee-rest.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.kumuluz.ee.openapi</groupId>
-            <artifactId>kumuluzee-openapi-mp</artifactId>
-            <version>1.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee.openapi</groupId>
-            <artifactId>kumuluzee-openapi-mp-ui</artifactId>
-            <version>${kumuluzee-openapi-mp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee.config</groupId>
-            <artifactId>kumuluzee-config-mp</artifactId>
-            <version>1.4.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.kumuluz.ee.cors</groupId>
             <artifactId>kumuluzee-cors</artifactId>
             <version>${kumuluzee-cors.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.kumuluz.ee.security</groupId>
-            <artifactId>kumuluzee-security-keycloak</artifactId>
-            <version>${kumuluzee-security.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.kumuluz.ee</groupId>
             <artifactId>kumuluzee-cdi-weld</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-jetty94-adapter</artifactId>
-            <version>${keycloak.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>si.fri.prpo.lokacijskiopomniki</groupId>
-            <artifactId>storitve</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -87,18 +71,6 @@
                         <id>package</id>
                         <goals>
                             <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>kumuluzee-openapi-mp-maven-plugin</artifactId>
-                <groupId>com.kumuluz.ee.openapi</groupId>
-                <version>${kumuluzee-openapi-mp.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
                         </goals>
                     </execution>
                 </executions>
