@@ -6,3 +6,13 @@ kumuluzee:
   server:
     http:
       port: 8081
+  security:
+    keycloak:
+      json: '{
+  "realm": "uporabniki-realm",
+  "bearer-only": true,
+  "auth-server-url": "http://localhost:8083/auth/",
+  "ssl-required": "external",
+  "resource": "uporabniki-api",
+  "confidential-port": 0
+}'

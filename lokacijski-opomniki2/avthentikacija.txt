@@ -1,0 +1,17 @@
+http://localhost:8083/auth/realms/uporabniki-realm/protocol/openid-connect/token
+grant_type password
+client_id uporabniki-app
+username	username
+password 	password	
+
+GET http://localhost:8081/v1/zadnje_postaje 
+
+POST http://localhost:8081/v1/zadnje_postaje
+{
+    "ime":"a",
+    "specifikacije":"b",
+    "lokacija": "lokacija",
+    "cena":5,
+    "obratovalniCasZacetek":"zacetek",
+    "obratovalniCasKonec": "konec"
+}

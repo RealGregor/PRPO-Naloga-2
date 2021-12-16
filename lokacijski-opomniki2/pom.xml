@@ -14,9 +14,9 @@
 
         <kumuluzee.version>3.12.2</kumuluzee.version>
         <kumuluzee-rest.version>1.5.1</kumuluzee-rest.version>
-        <kumuluzee-openapi-mp.version>1.4.0</kumuluzee-openapi-mp.version>
         <kumuluzee-cors.version>1.0.6</kumuluzee-cors.version>
-
+        <kumuluzee-security.version>1.2.0</kumuluzee-security.version>
+        <keycloak.version>5.0.0</keycloak.version>
     </properties>
 
     <dependencyManagement>
@@ -58,10 +58,19 @@
             <groupId>com.kumuluz.ee</groupId>
             <artifactId>kumuluzee-cdi-weld</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.security</groupId>
+            <artifactId>kumuluzee-security-keycloak</artifactId>
+            <version>${kumuluzee-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-jetty94-adapter</artifactId>
+            <version>${keycloak.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
-        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>com.kumuluz.ee</groupId>
