@@ -1,8 +1,3 @@
-KUMULUZEE_SECURITY_KEYCLOAK_JSON: '{"realm": "customers-realm",
-                "bearer-only": true,
-                "auth-server-url": "http://localhost:8080/auth",
-                "ssl-required": "external",
-                "resource": "customers-api"}'
 kumuluzee:
   name: simple-jdbc-sample
   version: 1.0.0
@@ -10,15 +5,29 @@ kumuluzee:
     name: dev
   datasources:
   - jndi-name: jdbc/LokacijskiOpomnikiDS
-    connection-url: jdbc:postgresql://localhost:5432/polnilnePostaje
+    connection-url: jdbc:postgresql://host.docker.internal:5432/polnilnePostaje
     username: postgres
     password: postgres
+  health:
+    logs:
+      enabled: true
+      type: both
+      level: FINE
+      period-s: 1
+    checks:
+      data-source-health-check:
+        type: liveness
+        jndi-name: jdbc/LokacijskiOpomnikiDS
+      disk-space-health-check:
+        threshold: 100000000
+      http-health-check:
+        - connection-url: https://rapidapi.com/Gramzivi/api/covid-19-data
   security:
     keycloak:
       json: '{
   "realm": "uporabniki-realm",
   "bearer-only": true,
-  "auth-server-url": "http://localhost:8083/auth/",
+  "auth-server-url": "http://localhost:8085/auth/",
   "ssl-required": "external",
   "resource": "uporabniki-api",
   "confidential-port": 0

@@ -25,19 +25,19 @@ public class JPAServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
-        List<Uporabnik> uporabniki = uporabnikiZrno.pridobiUporabnike();
-        resp.getWriter().println("Podatki o uporabnikih pridobljeni z JPQL:");
+        //List<Uporabnik> uporabniki = uporabnikiZrno.pridobiUporabnike();
+        //resp.getWriter().println("Podatki o uporabnikih pridobljeni z JPQL:");
         // izpis uporabnikov na spletno stran
-        for (Uporabnik x : uporabniki) {
-            resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
-        }
-        Postaja postaja = postajeZrno.pridobiPostajo(1);
-        resp.getWriter().println(postaja.getIme()+" "+postaja.getLokacija() + " "+ postaja.getCena() + " " + postaja.getObratovalniCasZacetek()+ " " + postaja.getObratovalniCasKonec());
+        //for (Uporabnik x : uporabniki) {
+          //  resp.getWriter().println(x.getIme()+" "+x.getPriimek() + " "+ x.getUporabniskoIme() + " " + x.getEmail());
+        // }
+        //Postaja postaja = postajeZrno.pridobiPostajo(1);
+        // resp.getWriter().println(postaja.getIme()+" "+postaja.getLokacija() + " "+ postaja.getCena() + " " + postaja.getObratovalniCasZacetek()+ " " + postaja.getObratovalniCasKonec());
 
         //test Request and Application scope
-        postaja = postajeZrno.pridobiPostajo(1);
+        // postaja = postajeZrno.pridobiPostajo(1);
 
-        postaja = postajeZrno.pridobiPostajo(1);
+        // postaja = postajeZrno.pridobiPostajo(1);
         //na tem mestu se zrno deinicializira, UporabnikZrno ostane
 
 

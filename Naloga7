@@ -1,0 +1,22 @@
+http://localhost:8080/health/ready
+
+http://localhost:8080/health/live
+
+https://portal.azure.com/#@unilj.onmicrosoft.com/resource/subscriptions/f6884db4-d5a5-4e57-9e25-7839f2516b88/resourceGroups/DefaultResourceGroup-EUS
+
+http://52.188.41.118:8081/v1/zadnje_postaje
+
+Prek postmana get in post
+
+
+
+post:
+{
+    "ime":"ime",
+    "specifikacije":"specifikacije",
+    "lokacija":"lokacija",
+    "cena":1,
+    "obratovalniCasZacetek":"obratovalniCasZacetek",
+    "obratovalniCasKonec":"obratovalniCasKonec"
+}
+
