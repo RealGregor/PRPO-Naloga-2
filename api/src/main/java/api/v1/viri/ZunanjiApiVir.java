@@ -22,7 +22,6 @@ import java.util.logging.Logger;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @CrossOrigin(supportedMethods = "GET, POST, PUT, DELETE, HEAD, OPTIONS")
-
 public class ZunanjiApiVir {
 
     private Logger logger = Logger.getLogger(UporabnikiVir.class.getName());

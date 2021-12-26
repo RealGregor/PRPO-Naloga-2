@@ -128,6 +128,8 @@ public class UpravljanjePolnilnicZrno {
 
     @BeleziKlice
     public Rezervacija rezervacijaPolnilnice(RezervacijaDTO rezervacijaDTO) {
+        System.out.println(rezervacijaDTO.getZacetekRezervacije());
+        System.out.println(rezervacijaDTO.getKonecRezervacije());
         if (!rezervacijaDTO.validate()) {
             logger.info("Neveljavni podatki");
             return null;
@@ -174,10 +176,12 @@ public class UpravljanjePolnilnicZrno {
 
         rezervacijeZrno.dodajRezervacijo(rezervacija);
 
+        //TODO samo za ostali 2 mikrostoritvi
+
         //dodaj novo rezervacijo neke postaje v drugo mikrostoritev
-        posodobiZadnjeTriRezerviranePostaje(rezervacijaDTO.getPostaja_id());
+        //posodobiZadnjeTriRezerviranePostaje(rezervacijaDTO.getPostaja_id());
         //posodobi dnevno stevilo rezervacij postaje
-        posodobiSteviloRezervacij(rezervacijaDTO.getPostaja_id());
+        //posodobiSteviloRezervacij(rezervacijaDTO.getPostaja_id());
 
         return rezervacija;
     }
